@@ -1,0 +1,38 @@
+name: Feature proposal
+description: Propose one user outcome with evidence and boundaries
+title: "feature: "
+labels: ["enhancement", "triage"]
+body:
+  - type: textarea
+    id: user
+    attributes:
+      label: User and task
+      description: Who needs to do what, with which existing system?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and current workaround
+    validations:
+      required: true
+  - type: textarea
+    id: success
+    attributes:
+      label: Observable acceptance outcome
+      description: Describe success and how to tell it works.
+    validations:
+      required: true
+  - type: textarea
+    id: boundaries
+    attributes:
+      label: Identity, data and side-effect boundaries
+      description: Include source authority, sensitive data, approval, retry and recovery needs.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Existing connector, protocol or framework alternative
+    validations:
+      required: true

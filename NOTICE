@@ -1,0 +1,6 @@
+Trusted Agent Platform
+Copyright 2026 Wu Xiaochen
+
+This product design and original project content are made available under the Apache License, Version 2.0. See LICENSE.
+
+This repository does not currently include ObjectStack code or third-party UI assets. Framework references and planned dependencies are listed in THIRD_PARTY_NOTICES.md; each package license must be verified before use.

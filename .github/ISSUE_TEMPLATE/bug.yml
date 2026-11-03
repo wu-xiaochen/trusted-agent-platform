@@ -1,0 +1,41 @@
+name: Bug report
+description: Report a reproducible product or documentation problem
+title: "bug: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: Use synthetic data only. Do not include credentials, customer records, or security vulnerabilities.
+  - type: input
+    id: version
+    attributes:
+      label: Project version / commit
+      placeholder: 0.x or commit SHA
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior and exact error
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction using synthetic data
+      description: Include steps, actor role, connection type, and relevant TP/PR ID.
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Data, authorization, or side-effect impact
+      description: Say whether a source write or uncertain outcome may have occurred.
+    validations:
+      required: true

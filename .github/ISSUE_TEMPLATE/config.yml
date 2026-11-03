@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability reporting
+    url: https://github.com/wu-xiaochen/trusted-agent-platform/security/advisories/new
+    about: Use this private channel for security issues after repository vulnerability reporting is enabled. Do not post customer data or credentials publicly.

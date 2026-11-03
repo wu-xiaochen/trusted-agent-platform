@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "0.1.0", "id": "maintenance.spare-request", "version": "0.1.0",
+  "title": "维修备件申请：待确认草稿，非运行应用", "lifecycle": "draft",
+  "sources": [
+    { "id": "maintenance", "kind": "http", "verification": "unverified" },
+    { "id": "inventory", "kind": "http", "verification": "unverified" }
+  ],
+  "objects": [
+    { "id": "maintenance.work-order", "sourceId": "maintenance" },
+    { "id": "inventory.part", "sourceId": "inventory" }
+  ],
+  "rules": [
+    { "id": "request.quantity", "status": "proposed", "description": "需业务负责人确认数量、单位与允许申请条件" },
+    { "id": "request.approval", "status": "unknown", "description": "需确认由哪个系统审批，提交不代表批准" }
+  ],
+  "actions": [{
+    "id": "inventory.request-spare", "sourceId": "inventory", "objectId": "inventory.part",
+    "enabled": false, "mode": "confirm", "ruleIds": ["request.quantity", "request.approval"],
+    "idempotency": "none", "reconciliation": "manual", "approval": "business-approval"
+  }],
+  "views": [{ "id": "request", "components": [
+    { "kind": "object-summary", "objectId": "maintenance.work-order" },
+    { "kind": "table", "objectId": "inventory.part" },
+    { "kind": "form", "objectId": "inventory.part", "actionId": "inventory.request-spare" },
+    { "kind": "action-confirmation", "actionId": "inventory.request-spare" },
+    { "kind": "status", "actionId": "inventory.request-spare" }
+  ] }]
+}
