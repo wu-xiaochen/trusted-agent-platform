@@ -19,3 +19,7 @@ Each TP item that is ready for coding receives a focused spec named `TP-XX-short
 
 Only TP-02 has a specification initially because the runtime selection is a high-impact dependency. Product feature stories become ready when TP-02 is accepted and the referenced interfaces are concrete. A proposed ADR is a design constraint to test, not accepted implementation evidence.
 
+- [TP-02 ObjectStack qualification specification](TP-02-objectstack-qualification.md)
+- [TP-02 staged implementation plan](../superpowers/plans/2026-11-03-runtime-qualification.md)
+- [AI coding team handoff contract](../engineering/AI-CODING-HANDOFF.md)
+

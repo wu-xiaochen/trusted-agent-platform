@@ -2,6 +2,8 @@
 
 **Version:** 0.1.0 · **Status:** Design baseline · **Updated:** 2026-11-03
 
+AI coding teams must follow the [AI Coding Team Handoff Contract](AI-CODING-HANDOFF.md). The first implementation work item is the [TP-02 Runtime Qualification Plan](../superpowers/plans/2026-11-03-runtime-qualification.md); product runtime coding is gated on its evidence and ADR-0002.
+
 ## Repository layout
 
 Use a pnpm monorepo and qualify ObjectStack as the first reuse path. Create directories when the first corresponding task is ready; do not add empty placeholder packages. `apps/*` are deployable processes. `plugins/*` extend ObjectStack using its supported plugin contracts. `packages/*` contain only platform-specific contracts/adapters that ObjectStack does not already supply. `examples/*` are synthetic, self-contained product demonstrations.

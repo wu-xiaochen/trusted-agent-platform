@@ -13,6 +13,8 @@ The approved design is split into focused documents so implementation stories ca
 - [Threat model](architecture/THREAT-MODEL.md): security boundaries, threats, controls and release gate.
 - [ADRs](adr/README.md): rationale, status and evidence needed for decisions.
 - [Framework review](research/FRAMEWORK-REVIEW.md): reuse-first recommendation and qualification gate.
+- [AI coding handoff](engineering/AI-CODING-HANDOFF.md): implementation authority, readiness, stop conditions and completion evidence for AI coding teams.
+- [TP-02 implementation plan](superpowers/plans/2026-11-03-runtime-qualification.md): bounded first engineering task and qualification gates.
 - [Design risk review](research/DESIGN-REVIEW.md): corrected design risks, residual evidence and assumptions.
 - [Open-source adoption plan](product/OPEN-SOURCE-ADOPTION.md): project wedge, launch readiness and community evidence.
 - [Backlog](backlog.json): stable TP IDs, dependencies, acceptance examples and milestone ownership for every PR requirement.

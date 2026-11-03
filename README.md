@@ -2,7 +2,7 @@
 
 Turn existing enterprise APIs into verified, permission-aware business task applications.
 
-[中文说明](README.zh-CN.md) · [Product strategy](docs/product/PRODUCT-STRATEGY.md) · [PRD](docs/product/PRD.md) · [Architecture](docs/architecture.md) · [Open-source adoption](docs/product/OPEN-SOURCE-ADOPTION.md) · [Engineering guide](docs/engineering/IMPLEMENTATION-GUIDE.md) · [Progress](docs/progress.md) · [Roadmap](docs/roadmap.md)
+[中文说明](README.zh-CN.md) · [Product strategy](docs/product/PRODUCT-STRATEGY.md) · [PRD](docs/product/PRD.md) · [Architecture](docs/architecture.md) · [Open-source adoption](docs/product/OPEN-SOURCE-ADOPTION.md) · [AI coding handoff](docs/engineering/AI-CODING-HANDOFF.md) · [TP-02 plan](docs/superpowers/plans/2026-11-03-runtime-qualification.md) · [Progress](docs/progress.md) · [Roadmap](docs/roadmap.md)
 
 **Status: product and engineering design baseline, not an operational agent platform.** This repository provides product strategy, PRD/UX, business/system/data/API/security architecture, framework research, ADRs, a draft business-task schema, local static validation, and project-management definitions. It does not yet connect real systems, run agents, enforce runtime permissions, or render generated applications.
 

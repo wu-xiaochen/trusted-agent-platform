@@ -2,6 +2,8 @@
 
 **Status:** Ready for a short architecture spike · **Milestone:** M0 · **Parent:** `docs/backlog.json` TP-02
 
+Execute the staged checklist in [TP-02 Runtime Qualification Implementation Plan](../superpowers/plans/2026-11-03-runtime-qualification.md). The plan does not pin an unqualified release; the spike must record exact candidate versions before installation.
+
 ## Outcome
 
 Choose one product runtime foundation with evidence before a team builds the platform kernel. The preferred candidate is the open-source ObjectStack framework. The result is an accepted or superseding ADR-0002 and a minimal synthetic application that proves or rejects the critical trust boundaries.
@@ -27,7 +29,7 @@ No actual customer data, secrets, public API promise, production connector, broa
 2. Start minimal host from a clean checkout using upstream-supported commands; record missing or undocumented steps.
 3. Confirm which packages are Apache-2.0, MIT, commercial-only, or transitive; exclude anything not clearly reusable in the public project.
 4. Test authentication: issuer/audience validation, session behavior, user identity mapping, revocation and OIDC logout/session expiry behavior.
-5. Test authorization: positive and negative object/field/record reads through REST, client, custom plugin, MCP, and server internals. Attempt direct create/update/delete for a source-owned business object; prove disabled or prove the action gate cannot be bypassed.
+5. Test authorization: positive and negative object/field/record reads through REST, client, custom plugin, MCP, and server internals. Inspect generated OpenAPI and route registration for every exposed operation. Attempt direct create/update/delete for a source-owned business object through each exposed route; prove disabled or prove the named action gate cannot be bypassed.
 6. Test source connector contracts: per-user vs service identity, narrow PostgreSQL read-only role, field filtering before Agent context, query limits, partial response and schema drift.
 7. Test plugin extension: task evidence/readiness attach to ObjectStack metadata without duplicating object/action/permission schemas or depending on unstable private APIs.
 8. Test UI: ObjectStack-native view/component metadata (plus only a narrowly scoped app-layout manifest if needed) rejects arbitrary script, unsafe import, unknown component, ungranted field and unbound action; effect is server-created. Record whether any required feature would force a parallel view/schema engine; that is a fail gate until a superseding ADR chooses one replacement core.

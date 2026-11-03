@@ -10,6 +10,7 @@ Updated: 2026-11-03 · Phase: M0 product and engineering design baseline · WIP 
 | Framework and license research | Desk review prepared | `docs/research/FRAMEWORK-REVIEW.md`; ObjectStack preferred but not qualified |
 | Design vulnerability review | Third review added native metadata single-source-of-truth, competitor saturation, GitHub launch readiness, private gateway and typed data-shape risks | `docs/research/DESIGN-REVIEW.md`; TP-02, user research, external installs and implementation evidence remain mandatory |
 | Code architecture and contribution process | Design baseline prepared | `docs/engineering/`, `docs/bmad/`, `AGENTS.md`, ADRs, backlog and story template |
+| AI coding handoff | Execution contract and TP-02 plan added; only TP-02 is currently suitable as the first implementation task | `docs/engineering/AI-CODING-HANDOFF.md`, `docs/superpowers/plans/2026-11-03-runtime-qualification.md` |
 | ObjectStack qualification (TP-02) | Not started | First engineering task; no runtime stack is yet proven or locked |
 | Static task contract tooling | Existing local baseline | `contracts/`, `scripts/`, `tests/`; initial 16 tests were reported passing on 2026-11-02, not rerun for this design update |
 | Product runtime / real connectors / Agent / generated task UI | Not implemented | Planned through TP-03 to TP-21; TP-02 framework qualification gates runtime choices |
