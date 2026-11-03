@@ -13,10 +13,11 @@ Updated: 2026-11-03 · Phase: M0 product and engineering design baseline · WIP 
 | ObjectStack qualification (TP-02) | Not started | First engineering task; no runtime stack is yet proven or locked |
 | Static task contract tooling | Existing local baseline | `contracts/`, `scripts/`, `tests/`; initial 16 tests were reported passing on 2026-11-02, not rerun for this design update |
 | Product runtime / real connectors / Agent / generated task UI | Not implemented | Planned through TP-03 to TP-14 |
-| Git history / GitHub repository / CI | Not completed | No initial public release or remote CI is claimed |
+| Git history / GitHub repository | Public repo created; initial baseline committed | `https://github.com/wu-xiaochen/trusted-agent-platform`, branch `main`, commit `4102ece`; outputs ignored |
+| GitHub CI / security reporting / branch protection | Not configured | Workflow and repository settings remain before collaborative implementation |
 | Codex project tracking | User confirmed project and conversation were moved | Project folder is current working directory |
 | Private/customer artifacts | Excluded from source scope | `outputs/` is git-ignored; do not publish or stage local artifacts |
 
 ## Handoff gate
 
-The planning baseline is ready for a bounded framework qualification spike, not for unrestricted feature coding. Complete TP-02 and accept ADR-0002 before product runtime work. Each later TP story must be marked ready with interfaces, acceptance evidence, security/data boundaries and failure states. A design review is not a penetration test or security certification.
+The public planning baseline is ready for a bounded framework qualification spike, not for unrestricted feature coding. Complete TP-02 and accept ADR-0002 before product runtime work. Each later TP story must be marked ready with interfaces, acceptance evidence, security/data boundaries and failure states. A design review is not a penetration test or security certification.
