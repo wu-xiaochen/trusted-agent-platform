@@ -1,8 +1,8 @@
 # Trusted Agent Platform
 
-Guided setup and governed task applications for existing enterprise and industrial systems.
+Turn existing enterprise APIs into verified, permission-aware business task applications.
 
-[中文说明](README.zh-CN.md) · [Product strategy](docs/product/PRODUCT-STRATEGY.md) · [PRD](docs/product/PRD.md) · [Architecture](docs/architecture.md) · [Engineering guide](docs/engineering/IMPLEMENTATION-GUIDE.md) · [Progress](docs/progress.md) · [Roadmap](docs/roadmap.md)
+[中文说明](README.zh-CN.md) · [Product strategy](docs/product/PRODUCT-STRATEGY.md) · [PRD](docs/product/PRD.md) · [Architecture](docs/architecture.md) · [Open-source adoption](docs/product/OPEN-SOURCE-ADOPTION.md) · [Engineering guide](docs/engineering/IMPLEMENTATION-GUIDE.md) · [Progress](docs/progress.md) · [Roadmap](docs/roadmap.md)
 
 **Status: product and engineering design baseline, not an operational agent platform.** This repository provides product strategy, PRD/UX, business/system/data/API/security architecture, framework research, ADRs, a draft business-task schema, local static validation, and project-management definitions. It does not yet connect real systems, run agents, enforce runtime permissions, or render generated applications.
 

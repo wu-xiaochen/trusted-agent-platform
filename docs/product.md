@@ -5,12 +5,13 @@ The canonical product documents are:
 - [Product strategy](product/PRODUCT-STRATEGY.md): audience, positioning, business objective, measurable pilot acceptance, boundaries and community goals.
 - [Product requirements](product/PRD.md): personas, journey, functional and non-functional requirements, first workflow and release UX gate.
 - [UX specification](product/UX-SPEC.md): guided builder, readiness matrix, controlled app renderer and operational states.
+- [Open-source adoption plan](product/OPEN-SOURCE-ADOPTION.md): competitors, product wedge, launch gates, community measures and why GitHub Trending cannot be guaranteed.
 - [Business architecture](architecture/BUSINESS-ARCHITECTURE.md): business roles, authority and executable shared contract.
 - [Roadmap](roadmap.md) and [backlog](backlog.json): milestone exit conditions and stable implementation tasks.
 
 ## Product promise
 
-**Help enterprises connect existing systems and deliver cross-domain Agent capabilities that people can understand, authorize, and operate.**
+**Turn existing enterprise APIs into verified, permission-aware business task applications that people and Agents can understand, authorize, and operate.**
 
 Start from one task and a concrete example. The platform guides business owners and solution architects through source capabilities, evidence, rules, tests, a controlled app, and operation. The service contract runs at the business-service layer, so UI, API, Agent, and MCP share authorization and action meaning.
 

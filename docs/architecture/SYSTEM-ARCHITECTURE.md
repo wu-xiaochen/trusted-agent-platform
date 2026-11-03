@@ -13,7 +13,7 @@ flowchart LR
   API --> Kernel[Business service kernel]
   Kernel --> Package[Immutable published package]
   Kernel --> Workbench[Ontology evidence and validation workbench]
-  Kernel --> AppSpec[Validated AppSpec and release builder]
+  Kernel --> AppSpec[Qualified native views and release builder]
   Kernel --> Policy[Per-action automation policy]
   Kernel --> Data[Authorized data service]
   Kernel --> Action[Action ledger and effect service]
@@ -29,7 +29,7 @@ flowchart LR
 
 The qualified ObjectStack runtime plus narrowly scoped governance plugins form the business service kernel between every surface and every source. There is no direct browser-to-source path and no Agent-to-source credential path. API, agent and Temporal workers may be separate processes, but they call the same versioned published capability services.
 
-The core product loop is: source profile → discovered capabilities → evidence-backed task model → validation and read-only dry run → per-action policy → AppSpec → immutable release → current-policy runtime. The ontology workbench authors task-sized business meaning and references ObjectStack's qualified object/action/permission metadata; it does not create a competing metadata or permission engine. The release builder packages only declarative UI assets and versioned contracts. The runtime resolves current identity, permissions, connector grants, secrets, source freshness and policy on each request.
+The core product loop is: source profile → discovered capabilities → evidence-backed proposals in ObjectStack-native metadata → native/extension validation and read-only dry run → per-action policy → app-release manifest → immutable release → current-policy runtime. The ontology workbench drafts task-sized changes against ObjectStack's qualified metadata; it does not create a competing object/action/permission/view engine. The release builder packages only qualified declarative UI assets, native bundle references and narrow app composition. The runtime resolves current identity, permissions, connector grants, secrets, source freshness and policy on each request.
 
 Process boundaries are security boundaries. Each worker uses a distinct workload identity, TLS-authenticated internal API, least-privilege scopes and network policy. Do not share a platform-admin token between API, agent and action processes. Model egress is allowlisted; the action worker has source egress only to configured endpoints; the API does not need broad source write credentials.
 
@@ -43,6 +43,7 @@ Start with a modular monolith composed of independently runnable processes:
 - `action-worker`: Temporal worker that executes only already-authorized action intents and reconciles known source operations.
 - `temporal`: durable execution service.
 - `postgres`: platform store, action ledger, audit, and outbox.
+- `connector-gateway` (later optional profile): customer-managed outbound connector for private sources. It is a constrained connector host, not a privileged tunnel or a second policy authority; do not add it until TP-23 security gates pass.
 
 The local developer path uses Docker Compose with a synthetic fixture and development identity. A production installation requires customer OIDC, persistent keys, TLS/reverse proxy, database backup, secret provider, and a configured model endpoint. Do not expose development identity or default secrets in a production profile. Kubernetes packaging waits for operational demand, supported upgrade strategy, and security review.
 
@@ -96,9 +97,9 @@ Before building product features on the runtime, complete TP-02: create a minima
 
 ### UI generation flow
 
-The Agent may propose an `AppSpec` draft using stable capability/component IDs. A package validator checks schemas, policy, field sensitivity, role visibility, and references. A publisher releases an immutable spec digest. At request time the server computes current roles and capability availability; a saved spec never freezes a user's old permissions.
+The Agent may propose a draft app manifest using stable ObjectStack view/capability/component IDs. It cannot define a second object, field, action, permission or view schema. Qualified native validators check native view metadata; platform validators check only app-composition references, policy, sensitivity and cross-boundary invariants. A publisher releases an immutable combined digest. At request time the server computes current roles and capability availability; a saved spec never freezes a user's old permissions.
 
-The deployable artifact is an OCI image or static bundle that contains the renderer, AppSpec, component-catalog version and release manifest. It contains no source/model credentials, no user authorization snapshot, and no source data. It calls the platform API/runtime or a customer-managed runtime endpoint. Promotion across dev/test/prod reuses the same artifact digest while each environment resolves its own approved secret references and grants. Per-application custom code and automatic plugin installation are outside v1.
+The deployable artifact is an OCI image or static bundle that contains the renderer, qualified native view metadata, narrow app manifest, component-catalog version and release manifest. It contains no source/model credentials, no user authorization snapshot, and no source data. It calls the platform API/runtime or a customer-managed runtime endpoint. Promotion across dev/test/prod reuses the same artifact digest while each environment resolves its own approved secret references and grants. Per-application custom code and automatic plugin installation are outside v1.
 
 ## Availability and failure semantics
 

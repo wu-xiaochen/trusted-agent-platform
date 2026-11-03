@@ -30,7 +30,7 @@ No actual customer data, secrets, public API promise, production connector, broa
 5. Test authorization: positive and negative object/field/record reads through REST, client, custom plugin, MCP, and server internals. Attempt direct create/update/delete for a source-owned business object; prove disabled or prove the action gate cannot be bypassed.
 6. Test source connector contracts: per-user vs service identity, narrow PostgreSQL read-only role, field filtering before Agent context, query limits, partial response and schema drift.
 7. Test plugin extension: task evidence/readiness attach to ObjectStack metadata without duplicating object/action/permission schemas or depending on unstable private APIs.
-8. Test UI: AppSpec validation rejects arbitrary script, unsafe import, unknown component, ungranted field and unbound action; effect is server-created.
+8. Test UI: ObjectStack-native view/component metadata (plus only a narrowly scoped app-layout manifest if needed) rejects arbitrary script, unsafe import, unknown component, ungranted field and unbound action; effect is server-created. Record whether any required feature would force a parallel view/schema engine; that is a fail gate until a superseding ADR chooses one replacement core.
 9. Test Temporal at-least-once delivery and source-commit/response-loss simulation. Demonstrate how the platform resolves unknown outcome; do not assert exactly-once remote effects.
 10. Build/upgrade/restore instructions and estimated process/dependency footprint; list open issues and upstream support channel.
 11. Write result in `docs/research/OBJECTSTACK-QUALIFICATION.md`; update ADR-0002 as accepted or create superseding decision. Record evidence and unresolved risks in backlog/progress.

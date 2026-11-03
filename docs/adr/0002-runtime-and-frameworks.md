@@ -39,7 +39,7 @@ TP-02 must use a pinned release rather than floating `main` and record actual co
 4. Generic CRUD routes can be disabled or made unable to bypass named source business actions.
 5. A plugin can add task evidence, readiness and source mapping without forking or replacing core metadata, authz, or query semantics.
 6. Read-only PostgreSQL and HTTP/OpenAPI adapters can meet query budgeting, provenance, and row/field scope needs or are cleanly extendable through documented driver ports.
-7. React metadata rendering supports a controlled component catalog, or the console can use it without a competing generated UI schema.
+7. ObjectStack-native view/component metadata plus a narrow app-layout manifest can render the required task app without a competing generated UI schema; no arbitrary code is required.
 8. Temporal worker can persist and recover a source-command simulation without storing sensitive source payloads in workflow history.
 9. Backup, restore, upgrades, supported Node versions and dependency licenses fit the project's self-hosted support goals.
 

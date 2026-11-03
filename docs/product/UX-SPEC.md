@@ -50,7 +50,7 @@ The validation workbench groups checks into contract, mapping, rule, authorizati
 
 ### 6. Application studio
 
-Generate a useful first draft automatically. Allow edits to page order, headings, catalog component choice, permitted fields, and task instructions. Do not expose arbitrary JSX, JavaScript, SQL, or unrestricted tool definitions. Every binding points to a published query/action ID.
+Generate a useful first draft automatically using ObjectStack-native view/component metadata after TP-02 qualifies its renderer. Allow edits to page order, headings, permitted fields, and task instructions through that native model. A project-owned manifest may fill only a demonstrated app-level composition gap and references native IDs; it cannot become another view, field, or permission schema. Do not expose arbitrary JSX, JavaScript, SQL, or unrestricted tool definitions. Every binding points to a published native view/query/action ID.
 
 The studio supports conventional work pages (search/list, record detail, guided form, task inbox, approval, status/history, and bounded report) alongside Agent surfaces (conversation, evidence panel, proposed plan, clarification, tool progress, confirmation and escalation). Generated pages are editable through the component/layout editor and remain bound to the same business package. AG-UI streams the Agent experience where selected; it does not define or compile the page. The release preview simulates each role and viewport before publish.
 
@@ -68,7 +68,7 @@ Use a capability matrix, not a scalar score:
 
 Every blocked state identifies the missing evidence and whether the next action belongs to the business owner, source administrator, or publisher.
 
-For each action, show its configured mode (`read-only`, `prepare-only`, `requester-confirmed`, `approval-required`, `guarded-autonomous`, `manual-only`), rationale, boundaries, test coverage, and owner. A policy simulator shows which cases auto-run, pause for requester confirmation, enter approval, or stop, with the exact guard that determined the path. The publish review pins AppSpec, component registry, package, connector contracts, automation policy and API compatibility versions. It creates a signed/digested immutable release artifact; promotion reuses the same artifact digest. Environment secret references, grants, OIDC and current permissions are injected at runtime, never captured in the artifact.
+For each action, show its configured mode (`read-only`, `prepare-only`, `requester-confirmed`, `approval-required`, `guarded-autonomous`, `manual-only`), rationale, boundaries, test coverage, and owner. A policy simulator shows which cases auto-run, pause for requester confirmation, enter approval, or stop, with the exact guard that determined the path. The publish review pins native metadata, narrow app manifest if needed, component renderer catalog, task package envelope, connector contracts, automation policy and API compatibility versions. It creates a signed/digested immutable release artifact; promotion reuses the same artifact digest. Environment secret references, grants, OIDC and current permissions are injected at runtime, never captured in the artifact.
 
 ### 8. Operate and recover
 
@@ -76,9 +76,9 @@ The task app includes a progress header, relevant business facts and provenance,
 
 ## Component catalog contract
 
-Initial component kinds: `object-summary`, `field-list`, `table`, `form`, `rule-status`, `source-evidence`, `action-preview`, `confirmation-panel`, `approval-panel`, `operation-status`, `timeline`, `alert`, and `help`. Each component declares:
+Initial component kinds to qualify: `object-summary`, `field-list`, `table`, `form`, `rule-status`, `source-evidence`, `action-preview`, `confirmation-panel`, `approval-panel`, `operation-status`, `timeline`, `alert`, and `help`. Reuse ObjectStack/ObjectUI component metadata where available. The project registry only maps an approved native component type to a reviewed React renderer; it is not a second component schema. Each component contract declares:
 
-- a stable component type and schema version;
+- a stable native component type and compatible runtime/catalog version;
 - allowed inputs, outputs, size and sensitivity classifications;
 - bound query/action capability IDs;
 - validation and empty/error/partial/loading states;

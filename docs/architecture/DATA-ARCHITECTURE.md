@@ -32,7 +32,7 @@ Discovery must not automatically publish a capability or grant it to an Agent. C
 
 “Compatible” is a reported test result for specific operations, auth modes, and connector versions, not a marketing-wide yes/no. Every connector catalog entry exposes one of these support tiers: **native** (maintained and contract-tested by this project), **beta** (implemented with stated gaps and narrower test coverage), **custom** (customer/community adapter using the published port and contract suite), or **unsupported** (the reason and required extension are shown). Each verified source profile records connector version, protocol/version, auth mode, operation-level capabilities, limits, schema fingerprint, last test time, and known gaps.
 
-The initial path is “import or configure → inspect → secure auth → test sample → map → grant.” OpenAPI documents and Postman collections may seed endpoint discovery; a direct endpoint can be configured manually when metadata is absent. The importer never executes an operation merely because it is described. It displays operations and classifies them as read, preview candidate, or command candidate; only reviewed read operations become query capabilities. A write operation requires a separate named action contract. Credentials are entered through a secret-reference form and never passed to the Agent or returned to the browser after save. API discovery and test requests use allowlisted hosts, bounded response sizes, timeouts, safe `$ref` resolution, and SSRF protections.
+The initial path is “import or configure → inspect → secure auth → test sample → map → grant.” OpenAPI documents and Postman collections may seed endpoint discovery; a direct endpoint can be configured manually when metadata is absent. The importer never executes an operation merely because it is described. It displays operations and classifies them as read, preview candidate, or command candidate; only reviewed read operations become query capabilities. A write operation requires a separate named action contract. Credentials are entered through a secret-reference form and never passed to the Agent or returned to the browser after save. API discovery and test requests use allowlisted hosts, bounded response sizes and timeouts. In v1, remote `$ref` resolution is disabled by default; an administrator may explicitly allow a reviewed origin. Apply DNS/IP validation at connection time and pin the validated result to the outbound request to reduce rebinding risk. Block loopback, link-local, cloud metadata, and private-network targets from the public platform worker. Private enterprise targets are reached through the separately authenticated customer-managed gateway with per-connection allowlists. These rules mitigate SSRF without making private APIs reachable from the internet-facing control plane.
 
 The first HTTP adapter should support only explicitly qualified authentication modes: static bearer token, API key in a configured header/query location, OAuth 2.0 client credentials, and anonymous access only when the source owner explicitly allows it. OAuth user delegation, mTLS, signed requests, SAML-to-API gateways, proprietary token exchange and other schemes remain `beta/custom/unsupported` until implemented and tested. Do not send credentials in query strings unless the source contract requires it; when it does, redact URLs from logs and audit. The onboarding report names the chosen principal model (`delegated user` or `installation service identity`) and its effective scope. A service identity is never presented as user delegation.
 
@@ -43,6 +43,17 @@ The custom connector port is capability-oriented and versioned. It must expose `
 For private-network systems, support an optional customer-managed connector gateway only after its trust boundary is specified: outbound-only mTLS to the platform, local source secrets, signed/pinned connector packages, endpoint allowlists, revocation, and auditable upgrade. Do not require Kubernetes for this path; a container/Compose deployment is the first supported footprint. This gateway is a deployment profile, not a new permission authority.
 
 ## Data access patterns
+
+The v1 connector contract normalizes data shapes without requiring a universal physical data store:
+
+| Data shape | v1 access path | Explicit limit |
+|---|---|---|
+| Structured business objects | OpenAPI/manual REST APIs and read-only PostgreSQL views mapped to typed object/query capabilities | No LLM-authored SQL and no source-record CRUD |
+| Documents and business files | Bounded file intake and authorized extraction with page/section provenance | No automatic enterprise-wide crawl; vector index is optional and governed |
+| Graph relationships | ObjectStack object relations plus bounded relational/API joins | No standalone graph database or arbitrary Cypher/SPARQL in v1 |
+| Time series | Bounded read operations over a source API where timestamp/unit/quality metadata is available | No high-volume historian replication or realtime control; dedicated adapters follow measured demand |
+
+The connector contract and readiness report must preserve shape-specific semantics. A flat JSON array is not an adequate substitute for time-series unit/time quality or typed relation semantics. A later graph/time-series adapter must pass source authorization, provenance, freshness and query-budget checks before it is labeled native.
 
 ### Structured systems
 
@@ -57,7 +68,7 @@ For private-network systems, support an optional customer-managed connector gate
 - Fetch/extract only the permitted content required by a declared query. Apply ACL before retrieval and again before context assembly.
 - Treat document text as untrusted instructions and data. Cite source passages and retrieval time; content cannot grant a tool, role, approval, or credential.
 - Keep vector retrieval optional and replaceable; do not make a vector database a mandatory platform dependency until measured need. Any index has explicit permission/delete propagation and rebuild semantics.
-- Business-file ingestion is a separate, user-visible workflow: enforce file type/size limits, malware scanning where deployable, extraction status, permission/retention, source hash, and page/section provenance. Extracted content and embedded instructions are untrusted. The Agent may propose ontology terms from authorized content, but a citation and confidence do not confirm business meaning.
+- Business-file ingestion is a separate, user-visible workflow: enforce file type/size limits, isolate parsers with CPU/memory/time limits, bound archive expansion and page count, never execute macros/scripts/embedded links, and expose scan/extraction status. Store permission/retention, source hash and page/section provenance. Extracted content and embedded instructions are untrusted. The Agent may propose ontology terms from authorized content, but a citation and confidence do not confirm business meaning.
 - Every uploaded file is associated with uploader, workspace, explicit access scope, retention deadline, source hash, malware/extraction status, parser version and provenance. Only authorized users can retrieve the file/extract; ACL is checked before parsing into model context. In Compose, content uses an explicit persistent encrypted volume with permissions; production may configure an object-store adapter. Deletion tombstones and propagates to extracted text/indexes; failed deletion is visible and blocks further retrieval. The platform must not treat uploader identity alone as permission for every workspace member.
 
 ### Graph relationships
@@ -98,10 +109,12 @@ Every operational row belongs to the one-installation workspace. Use UUIDv7/UUID
 | `workspace_settings` | install identity, public URL, locale, retention policy, encryption-key references |
 | `memberships` | OIDC issuer + subject unique key, roles/attributes, status; no local password table in v1 |
 | `connections` | connector type/version, endpoint, identity mode, secret reference, status, owner, revision |
+| `business_files` | opaque storage reference, uploader, access scope/ACL, source hash, media type, parser/scan/extraction state, provenance, retention/deletion state |
 | `source_catalog_entries` | connection, resource ID, schema fingerprint, operation capability, limits, last verified time |
 | `mapping_revisions` | source catalog entry, package/object/field IDs, transform, authority, tests, author |
 | `package_revisions` | package ID, semantic version, canonical JSON, content digest, lifecycle, parent digest, author |
 | `business_decisions` | decision kind, rule/effect/package digest, actor, policy revision, scope, outcome, expiry |
+| `action_policy_revisions` | action/environment scope, mode, deterministic guards/limits, owner/publisher decisions, connector safety evidence, digest, lifecycle |
 | `app_specs` / `releases` | immutable app/package digests, component registry version, environment, publisher |
 | `capability_grants` | principal/role, source/app/package scope, capability, allowed operation, expiry/revocation |
 | `runs` | actor, release, request, state, timestamps, model/provider metadata, redacted evidence refs |

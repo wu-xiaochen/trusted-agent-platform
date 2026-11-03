@@ -11,15 +11,15 @@ Business vocabulary, source mappings, executable actions and generated UI must s
 
 ## Decision
 
-If ADR-0002 passes, use ObjectStack metadata for objects, fields, relationships, actions, permissions and view/component metadata. Add only task-specific extension records for task goal, evidence/provenance, extracted/suggested/unknown/conflict/confirmed rule state, source-capability verification, freshness/partial/budget semantics, action idempotency/reconciliation evidence, canonical effect binding and release linkage.
+If ADR-0002 passes, use ObjectStack's native metadata as the only source for objects, fields, relationships, actions, permissions and views/components. A release envelope references the pinned native bundle by ID/digest and stores only task-specific extension records: task goal, evidence/provenance, business decisions, source mappings/capability verification, freshness/partial/budget evidence, action idempotency/reconciliation policy, effect binding, and release linkage. A platform AppSpec may add only app-level route/layout composition that the qualified native view metadata does not already provide; every binding points back to native IDs.
 
-The extension references stable ObjectStack IDs and digests; it does not redefine the same object/action/permission. The compiled release is immutable and addressed by ObjectStack metadata digest plus extension digest. If qualification fails, one replacement core is selected in a superseding ADR before product implementation.
+The extension references stable ObjectStack IDs and digests; it does not redefine object/action/permission/view/component schemas, generic REST semantics, or identity. Platform validation checks references and cross-boundary invariants; ObjectStack's qualified validators own native metadata validation. The compiled release is immutable and addressed by native metadata digest plus extension/app manifest digests. If qualification fails, one replacement core is selected in a superseding ADR before product implementation.
 
 This is a bounded executable business model, not a universal OWL reasoner or source of record.
 
 ## Consequences
 
-Users can start with a task template and progressively confirm only relevant business facts. Model-generated metadata remains draft until a business owner/publisher review. Arbitrary scripts and dynamic code are excluded. ObjectStack schema evolution and the platform extension evolve together through an explicit compatibility/migration process.
+Users can start with a task template and progressively confirm only relevant business facts. Model-generated native-metadata proposals remain draft until authorized review. Arbitrary scripts and dynamic code are excluded. ObjectStack schema evolution and the platform extension evolve together through an explicit compatibility/migration process. If a required app view is unsupported natively, record that gap in TP-02/ADR rather than starting an independent view schema by default.
 
 ## Reconsider when
 

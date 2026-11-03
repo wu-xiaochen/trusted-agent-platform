@@ -14,8 +14,10 @@ The approved design is split into focused documents so implementation stories ca
 - [ADRs](adr/README.md): rationale, status and evidence needed for decisions.
 - [Framework review](research/FRAMEWORK-REVIEW.md): reuse-first recommendation and qualification gate.
 - [Design risk review](research/DESIGN-REVIEW.md): corrected design risks, residual evidence and assumptions.
+- [Open-source adoption plan](product/OPEN-SOURCE-ADOPTION.md): project wedge, launch readiness and community evidence.
+- [Backlog](backlog.json): stable TP IDs, dependencies, acceptance examples and milestone ownership for every PR requirement.
 
-**Key decision:** ObjectStack is the preferred existing business-metadata runtime to qualify. It owns objects, actions, permissions and view metadata if it passes the security and extensibility gate. This project adds the guided setup and narrow evidence/action-safety capabilities missing for the product. It must not build a parallel ontology or permission engine. Exact versions and the decision to adopt are not locked until TP-02 passes.
+**Key decision:** ObjectStack is the preferred existing business-metadata runtime to qualify. It owns objects, actions, permissions, views and governed REST metadata if it passes the security and extensibility gate. This project adds guided setup and narrow evidence/action-safety capabilities missing for the product. It must not build a parallel ontology, permission, REST or UI schema engine. Exact versions and the decision to adopt are not locked until TP-02 passes.
 
 The topology is a modular TypeScript application with separate model and side-effect workers, PostgreSQL for platform records, and one durable coordinator for cross-system writes. The source system remains authoritative. Read, preview, submit, approval and reconciliation are separate capabilities. Generated UI, Agent tools, APIs and MCP resolve through the same server-side business capabilities.
 

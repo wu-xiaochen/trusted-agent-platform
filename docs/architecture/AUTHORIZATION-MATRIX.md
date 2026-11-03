@@ -36,7 +36,7 @@ Deny overrides allow. A missing/unknown attribute, expired grant, schema mismatc
 | Confirm business rules | Scoped | — | Only if separately assigned owner | ✓ | — | — | — | — | — |
 | Run read/test case | ✓ | ✓ | ✓ | ✓ | Scoped | Published-app scope | Scoped | Scoped | Read-only scope |
 | Simulate action automation policy | Scoped | Connector evidence only | Scoped | ✓ | ✓ | — | Scoped review only | — | — |
-| Publish/raise action automation mode | — | — | — | ✓ for owned business scope | ✓ after owner decision | — | — | — | — |
+| Publish/raise action automation mode | — | — | — | ✓ for owned business scope | ✓ after owner decision (different principal for guarded-autonomous) | — | — | — | — |
 | Publish app/package | ✓ | — | — | Review required rules | ✓ | — | — | — | — |
 | Build/promote app release artifact | — | Environment config only | — | — | ✓ | — | — | Deploy only if assigned | — |
 | Request business action | Scoped | — | — | — | — | ✓ | — | — | — |
@@ -57,7 +57,7 @@ High-impact policy may require requester/approver separation and rule owner/publ
 | Extract business-file content | File reader permission and workspace scope before parser; recheck before model context | Upload scope and retention are explicit; file contents are untrusted; deletion/revocation propagates to extracted text and indexes |
 | Propose ontology terms/mappings | Current task editor plus read access to every input | Proposals preserve evidence and cannot confirm meaning, set permissions or publish |
 | Confirm a rule | Confirming principal and rule owner at write | Evidence, rule revision and scope recorded; required owner role |
-| Publish action automation policy | Business owner for the action and publisher for the release | Mode increase requires both decisions, exact revision, passing policy cases, current connector safety evidence and source permission; no self-approval when policy prohibits it |
+| Publish action automation policy | Business owner for the action and publisher for the release | Mode increase requires two distinct principals, exact revision, passing policy cases, current connector safety evidence and source permission; self-approval is denied for guarded autonomy |
 | Publish package/app | Publisher at publish transaction | Required rules confirmed, references valid, source grants ready, digest and review recorded |
 | Preview action | Current requester and action scope | Read-only preview may query source; no source command |
 | Confirm an effect | Requester at confirmation | Exact effect digest, target, release, expiry and current role |

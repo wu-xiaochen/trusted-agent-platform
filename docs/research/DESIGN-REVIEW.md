@@ -1,8 +1,10 @@
 # Design Risk Review
 
-**Review date:** 2026-11-03 · **Scope:** Product and architecture documents in this repository · **Result:** Baseline is coherent enough to proceed to TP-02, but not proof of implementation security or customer fit.
+**Review date:** 2026-11-03 · **Scope:** Product and architecture documents in this repository · **Result:** The design baseline is internally coherent enough to start the bounded TP-02 qualification spike; implementation security, runtime feasibility, and customer fit remain unproven.
 
 “Perfect” cannot be demonstrated for a design with untested frameworks, integrations and users. This review names the highest-impact design risks, confirms the mitigations now specified, and keeps unresolved assumptions visible. It is not a code audit, penetration test, legal opinion, or security certification.
+
+The previous review exposed an ambiguity between ObjectStack-native metadata and project-owned package/UI schemas. This revision closes that design ambiguity in documentation. It does not establish that ObjectStack can satisfy the contract: TP-02 is a stop/go gate, and no downstream runtime implementation should be treated as ready until that evidence exists.
 
 ## Findings and design changes
 
@@ -24,9 +26,17 @@
 | “Top 20” or “best UX” may create an untestable success promise | Medium | Treat ranking as aspiration; use install/reuse, task completion, safe recovery, contribution and user comprehension measures. | Track public and user evidence without presenting vanity metrics as business value. |
 | Broad connector claim makes onboarding seem easy but hides protocol/auth/schema incompatibility | High | PR-15/16 and ADR-0007 define support tiers, operation-level verified capability reports, safe import/test steps, and a custom connector contract. | Test an API-described and manually configured system; publish a compatibility matrix only from contract-test evidence. |
 | Ontology assistant creates plausible but ungrounded business meaning | Critical | PR-17/18 require evidence-linked proposal provenance, owner confirmation, visual mapping/rule checks, adversarial cases, and read-only trial runs. | Show provenance preservation through extraction, edits, revision, publish, and runtime; verify no write port during dry run. |
-| AG-UI treated as the complete generated-app framework | High | ADR-0008 makes AppSpec/component catalog the canonical app/release format and AG-UI an optional event interaction adapter. | Prototype traditional and Agent task screens; prove artifact promotion and current authz behavior. |
+| AG-UI treated as the complete generated-app framework | High | ADR-0008 makes qualified ObjectStack-native views plus a narrow release manifest the app artifact; AG-UI is an optional event interaction adapter. | Prototype traditional and Agent task screens; prove artifact promotion and current authz behavior. |
 | Organization cannot tell which Agent actions may run without a person | Critical | PR-20 and ADR-0009 add six explicit action modes, bounded conditions, simulator, human roles, and fail-closed triggers. | Exercise each mode with business owners and adversarial attempts to change mode via model/UI/MCP. |
 | AI coding builds to a broad architecture without stable increments or evidence | High | TP-17 through TP-21 tie new product needs to acceptance examples, explicit dependencies, source docs and immutable decisions; specs remain required per TP. | Review that each first implementation task has a ready story and remains within WIP=1. |
+
+## Additional risks from independent review
+
+| Risk | Severity | Design resolution | Residual evidence required |
+|---|---|---|---|
+| Native ObjectStack metadata and project-owned `DomainPackage`/`AppSpec` drift into two object/view/permission schemas | Critical | Revised domain contract makes the release envelope reference ObjectStack-native metadata; platform owns only narrow evidence, mappings, policy, readiness and app composition. TP-02/ADR-0002 now fails if the UI or metadata boundary forces a parallel engine. | Inspect the exact pinned native schemas and generated routes; prove one object/action/view through UI, API, Agent and MCP, or supersede the runtime decision before feature work. |
+| Generic Agent/workflow platforms already cover most advertised modules, so “all-in-one trusted Agent platform” does not create a reason to switch | High | Narrow the first-market wedge to turning existing APIs into verified, permission-aware task apps. Adoption plan compares Dify, n8n, Flowise/Langflow and separates proven product difference from hypotheses. | Observe target users solving the same task with current tools; verify they choose/reuse this project and identify the specific trust/task-builder advantage. |
+| GitHub Trending ambition is treated as an engineering acceptance criterion or formula can be gamed | High | Open-source adoption plan separates controllable launch readiness and product/community signals from an uncontrollable Trending outcome; no star target substitutes for repeated use. | Recheck current GitHub page and public project/community evidence at launch; do not infer a predictable top-20 threshold from historical methodology. |
 
 ## Additional controls required in implementation
 

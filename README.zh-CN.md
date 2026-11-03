@@ -1,8 +1,8 @@
 # 可信 Agent 平台
 
-**方便接入现有系统，可信办理跨域业务。**
+**把企业现有 API 变成经过验证、受权限约束的业务任务应用。**
 
-[产品战略](docs/product/PRODUCT-STRATEGY.md) · [产品需求](docs/product/PRD.md) · [总体架构](docs/architecture.md) · [数据架构](docs/architecture/DATA-ARCHITECTURE.md) · [实施规范](docs/engineering/IMPLEMENTATION-GUIDE.md) · [开发路线图](docs/roadmap.md) · [当前进度](docs/progress.md)
+[产品战略](docs/product/PRODUCT-STRATEGY.md) · [产品需求](docs/product/PRD.md) · [总体架构](docs/architecture.md) · [数据架构](docs/architecture/DATA-ARCHITECTURE.md) · [开源采用计划](docs/product/OPEN-SOURCE-ADOPTION.md) · [实施规范](docs/engineering/IMPLEMENTATION-GUIDE.md) · [开发路线图](docs/roadmap.md) · [当前进度](docs/progress.md)
 
 当前交付是完整的产品与工程设计基线，**尚不是可运行的企业 Agent 平台**。已有最小业务任务契约和静态校验工具，但没有真实系统连接器、运行时授权、Agent 执行、生成式业务应用或可靠写入能力。
 

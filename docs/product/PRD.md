@@ -2,7 +2,7 @@
 
 **Version:** 0.1.0 · **Status:** Design baseline · **Updated:** 2026-11-03
 
-This document defines product behavior for the first end-to-end release. It does not assert that the behavior is implemented. Stable requirement IDs link to `docs/backlog.json`.
+This document defines product behavior from the first vertical slice through the planned v1 platform. It does not assert that the behavior is implemented. Release scope and dependencies are staged in `docs/roadmap.md`; stable requirement IDs link to `docs/backlog.json`.
 
 ## Personas
 
@@ -31,7 +31,7 @@ This document defines product behavior for the first end-to-end release. It does
 | PR-01 | Guided task creation | A first-time solution architect can create a draft from a template without being asked to define a global ontology or agent graph. |
 | PR-02 | Evidence-backed proposals | Extracted, suggested, confirmed, unknown, and conflicting facts are distinct states with provenance and revision history. |
 | PR-03 | Capability-aware connections | A connection reports verified protocol, identity mode, source resources, permissions, limits, freshness, and supported operations; missing features remain explicit. |
-| PR-04 | Executable business package | Objects, relations, rules, queries, actions, data shapes, and UI bindings are versioned and validated as one dependency graph. |
+| PR-04 | Executable business package | Qualified ObjectStack-native objects, relations, rules, queries, actions, data shapes, and views plus narrow task evidence/source/action-safety extensions are versioned and validated as one release; no duplicate core metadata engine is introduced. |
 | PR-05 | Shared server enforcement | Web, API, Agent, and MCP requests invoke the same server-side query/action services. Clients cannot directly perform a source write. |
 | PR-06 | Read authorization and provenance | Authorization is evaluated before source results or retrieved content enter an LLM context. Results retain source and freshness evidence. |
 | PR-07 | Safe action preview | A preview is derived by the server from the selected package and connector. It returns a canonical effect descriptor and cannot submit the effect. |
@@ -44,10 +44,12 @@ This document defines product behavior for the first end-to-end release. It does
 | PR-14 | Self-hosted operation | A documented local Compose deployment starts the platform, database, and durable coordinator with health checks, backup guidance, and explicit production configuration. |
 | PR-15 | Low-friction, honest source onboarding | An integration administrator can import a supported API description or configure a supported source, set credentials in a secret-safe flow, inspect discovered operations, test a bounded sample, and see an explicit support tier and verified capability report before granting use. No source is called compatible from URL reachability alone. |
 | PR-16 | Broad connector compatibility through tiers | The product exposes a documented native/beta/custom/unsupported matrix and a versioned connector contract. Native protocol coverage is prioritized over claims of universal compatibility; an unsupported adapter fails with a precise reason and extension path. |
-| PR-17 | Evidence-backed ontology authoring | An Agent can propose business objects, relations, rules, and mappings from authorized schemas and uploaded business files; each proposal records provenance and is visibly separated from source-observed and human-confirmed facts. |
+| PR-17 | Evidence-backed ontology authoring | An Agent can propose ObjectStack-native business objects, relations, rules, and mappings from authorized schemas and uploaded business files; each proposal records provenance and is visibly separated from source-observed and human-confirmed facts. |
 | PR-18 | Visual validation and safe trial run | A user can inspect the domain graph and field mappings, resolve conflicts, compare revisions, run schema/rule/permission checks and synthetic cases, and perform read-only dry runs. Dry runs cannot execute source writes. Publish is blocked for unresolved required definitions or failed safety checks. |
-| PR-19 | Frozen, deployable task applications | An Agent can draft traditional task screens and Agent collaboration screens as a validated declarative AppSpec bound to published capabilities. App releases are immutable and deployable as a versioned OCI image or platform-hosted package; runtime permissions, connector grants, and secrets remain external and current. |
+| PR-19 | Frozen, deployable task applications | An Agent can draft traditional task screens and Agent collaboration screens using qualified ObjectStack-native view/component metadata and, only for missing app-level composition, a narrow manifest bound to native capabilities. No parallel view/permission schema is created. App releases are immutable and deployable as a versioned OCI image or platform-hosted package; runtime permissions, connector grants, and secrets remain external and current. |
 | PR-20 | Explicit automation and human decision policy | Each action is configured as read-only, prepare-only, requester-confirmed, approval-required, guarded-autonomous, or manual-only. A policy simulator shows the selected path and reason. Model confidence never grants an automation mode; unknown, stale, conflicting, revoked, or unreconciled states fail closed. |
+| PR-21 | Typed graph and time-series data access | The platform maps source relationships to bounded typed object relations and exposes time-series reads with units, time zone, quality, sampling and point limits. It preserves source authority and provenance; it does not expose arbitrary graph queries or device-control writes. |
+| PR-22 | Private-network system connectivity | A customer-managed gateway can connect approved private systems without opening inbound source access. It uses outbound authenticated transport, per-source allowlists and local secret handling; revocation or gateway loss blocks dependent operations safely. |
 
 ## First task definition
 
@@ -57,7 +59,7 @@ The example must include: no matching asset; ambiguous part mapping; stale inven
 
 ## Product promise and boundary
 
-The product promise is: connect an enterprise capability, explain its business meaning, prove the task on representative cases, and publish a controlled application without replacing the source system. “Broad compatibility” means a clear adapter path and tested capability matrix, not every legacy system working without configuration. “Ontology” means the small, executable business contract needed by a task, not an enterprise-wide knowledge graph project. AG-UI is an interaction/event protocol for Agent-facing experiences; the platform's canonical application format is its validated AppSpec and component registry.
+The product promise is: connect an enterprise capability, explain its business meaning, prove the task on representative cases, and publish a controlled application without replacing the source system. “Broad compatibility” means a clear adapter path and tested capability matrix, not every legacy system working without configuration. “Ontology” means the small, executable business contract needed by a task, not an enterprise-wide knowledge graph project. ObjectStack-native view/component metadata is the only view schema if TP-02 passes; a project-owned app manifest may contain only missing route/layout composition. AG-UI is an Agent interaction/event protocol, not the app schema.
 
 ## Non-functional requirements
 

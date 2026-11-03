@@ -32,7 +32,8 @@
     "M3",
     "M4",
     "M5",
-    "M6"
+    "M6",
+    "M7"
   ],
   "items": [
     {
@@ -65,7 +66,7 @@
       ],
       "acceptance": [
         "Record exact versions, licenses, Node compatibility, install and upgrade shape for candidates.",
-        "Exercise API/OpenAPI, DB migration, Temporal replay, connector contract, React AppSpec rendering, AG-UI and MCP auth boundary using a synthetic vertical spike.",
+        "Exercise API/OpenAPI, DB migration, Temporal replay, connector contract, ObjectStack-native view rendering with only a narrow app-composition manifest, AG-UI and MCP auth boundary using a synthetic vertical spike.",
         "Update ADR-0002 and other affected ADRs with evidence and accepted/rejected choices."
       ],
       "evidence": "docs/adr/0002-runtime-and-frameworks.md"
@@ -105,8 +106,8 @@
         "PR-05"
       ],
       "acceptance": [
-        "Versioned package schema describes objects, relations, provenance, rules, query/action capabilities and app references.",
-        "Validator rejects unresolved references, incompatible fields, unconfirmed required rules, unsafe expressions and duplicate IDs.",
+        "Release envelope references qualified ObjectStack-native metadata by version/digest and defines only the missing task evidence/source-mapping/action-safety extensions.",
+        "ObjectStack's native validator checks native object/action/permission/view metadata; platform validation rejects unresolved extension references, incompatible mappings, unconfirmed required decisions, unsafe connector claims and duplicate extension IDs.",
         "Publishing creates an immutable semantic version and canonical digest; a change creates a new revision."
       ],
       "evidence": "docs/architecture/DOMAIN-PACKAGE.md"
@@ -196,7 +197,7 @@
     },
     {
       "id": "TP-09",
-      "title": "Implement controlled AppSpec and component renderer",
+      "title": "Render qualified native task views and controlled app composition",
       "milestone": "M3",
       "status": "planned",
       "dependsOn": [
@@ -211,7 +212,7 @@
         "PR-12"
       ],
       "acceptance": [
-        "Generated spec only references catalog components and published query/action IDs.",
+        "Generated view/app declarations reuse qualified ObjectStack-native metadata; any narrow app-composition manifest references native component/view/query/action IDs and introduces no second business/view/permission schema.",
         "Validation rejects arbitrary script, unknown component, forbidden field and cross-release reference.",
         "Published spec is immutable; runtime evaluates current permissions; action confirmation uses canonical server effect data."
       ],
@@ -403,7 +404,7 @@
         "PR-17"
       ],
       "acceptance": [
-        "Authorized schema and synthetic business files can produce proposed objects, relations, mappings, rules, and exceptions.",
+        "Authorized schema and synthetic business files can produce proposed ObjectStack-native objects, relations, mappings, rules, and exceptions without defining a parallel ontology schema.",
         "Each proposal retains source/page/path evidence and an explicit provenance state; Agent confidence cannot promote it to confirmed.",
         "Users can inspect and edit the model through graph/table/form views without authoring ontology code.",
         "Business owner confirmation is attributable, versioned, and distinct from publisher approval or source grants.",
@@ -472,13 +473,56 @@
         "PR-19"
       ],
       "acceptance": [
-        "AppSpec supports conventional business pages and Agent collaboration surfaces using only a versioned allowlisted component registry.",
+        "Qualified ObjectStack-native view/component metadata supports the demonstrated conventional and Agent-collaboration pages; any app manifest is limited to composition and uses an allowlisted renderer registry.",
         "AG-UI carries Agent interaction events but does not define the canonical app schema, action authorization, or release artifact.",
-        "Publisher produces reproducible signed/digested OCI or static release with pinned AppSpec, package, policy, component catalog and API compatibility references.",
+        "Publisher produces reproducible signed/digested OCI or static release with pinned native metadata, narrow composition manifest, extension package, policy, component catalog and API compatibility references.",
         "Same artifact digest is promoted across environments; runtime secret references, grants, identity and permissions remain environment-specific and current.",
         "Generated apps pass role simulation, keyboard/accessibility, denied-binding, revocation, and clean deployment checks."
       ],
       "evidence": "docs/adr/0008-appspec-release-artifact.md; docs/product/UX-SPEC.md; docs/architecture/SYSTEM-ARCHITECTURE.md"
+    },
+    {
+      "id": "TP-22",
+      "title": "Add typed graph-relation and time-series read capabilities",
+      "milestone": "M7",
+      "status": "planned",
+      "dependsOn": [
+        "TP-07",
+        "TP-15"
+      ],
+      "requirementIds": [
+        "PR-21"
+      ],
+      "acceptance": [
+        "Graph relations use typed object/edge IDs, source authority and bounded traversal; arbitrary Cypher/SPARQL or unbounded expansion is rejected.",
+        "Time-series query contract requires UTC interval semantics, unit, aggregation/resolution, quality/gap metadata, source watermark and maximum points.",
+        "Both data shapes enforce the current principal/source scope before model context, budgets, provenance and freshness metadata.",
+        "Synthetic conformance cases cover unit conversion, timezone boundaries, missing intervals, stale watermarks, denied rows/edges, and traversal/point-limit overflow.",
+        "No graph/time-series database is added without measured workload evidence; any new dependency or public contract has a reviewed ADR."
+      ],
+      "evidence": "docs/architecture/DATA-ARCHITECTURE.md; docs/adr/0010-typed-graph-and-time-series-contracts.md"
+    },
+    {
+      "id": "TP-23",
+      "title": "Deliver a constrained private-network connector gateway profile",
+      "milestone": "M7",
+      "status": "planned",
+      "dependsOn": [
+        "TP-06",
+        "TP-14",
+        "TP-17"
+      ],
+      "requirementIds": [
+        "PR-22"
+      ],
+      "acceptance": [
+        "Gateway initiates outbound mTLS only; no inbound tunnel, arbitrary port-forwarding, shell, browser or package installation is available.",
+        "Each connection has a destination allowlist, explicit source identity mode, local secret reference and least-privilege connector workload identity.",
+        "Platform sends only signed/versioned capability requests; gateway rechecks grants and limits and returns provenance-bearing bounded results.",
+        "Revocation, lost heartbeat, expired certificate, adapter signature failure, and unexpected destination all fail closed and stop new calls.",
+        "A customer can upgrade/roll back a pinned gateway build and connector without losing audit/evidence; compromise and SSRF scenarios are exercised before production use."
+      ],
+      "evidence": "docs/architecture/SYSTEM-ARCHITECTURE.md; docs/architecture/THREAT-MODEL.md; docs/adr/0011-private-connector-gateway.md"
     }
   ]
 }

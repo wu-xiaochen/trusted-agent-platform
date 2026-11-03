@@ -11,7 +11,7 @@ The platform must support generated task interfaces and Agent-to-service interop
 
 ## Decision
 
-Generate a declarative, versioned `AppSpec` that can reference only catalog components and published capability IDs. The server validates and publishes it; the browser renders allowlisted components and calls authenticated APIs. AG-UI is an optional interaction/event transport, not the UI authority or action ledger. MCP exposes the same published capabilities through the same authz kernel. External MCP tools and Skills are registered, pinned, reviewed, and granted narrowly; metadata is untrusted.
+Generate task views from qualified ObjectStack-native view/component metadata. If an app-level route/layout gap remains, a narrow versioned manifest may compose native view and capability IDs; it cannot redefine object, field, view, component or permission schemas. The server validates the native and extension boundaries and publishes an immutable release; the browser renders only qualified/allowlisted components and calls authenticated APIs. AG-UI is an optional interaction/event transport, not the UI authority or action ledger. MCP exposes the same published capabilities through the same authz kernel. External MCP tools and Skills are registered, pinned, reviewed, and granted narrowly; metadata is untrusted.
 
 ## Consequences
 

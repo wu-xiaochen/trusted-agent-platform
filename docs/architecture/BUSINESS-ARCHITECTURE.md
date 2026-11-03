@@ -17,15 +17,13 @@
 
 ## The executable business package
 
-The published application metadata is the shared boundary across interaction surfaces. ObjectStack is the preferred source for typed object, field, relation, action, permission, and view metadata, subject to TP-02 qualification. This project adds only the task-specific extension that metadata does not already represent: evidence/decision states, readiness, source-operation safety, canonical effect binding, and reconciliation. Never fork or duplicate ObjectStack object/action/permission semantics. This is not a universal knowledge graph or general OWL reasoner. The combined package references:
+The published application metadata is the shared boundary across interaction surfaces. ObjectStack is the preferred **single source of business metadata**, subject to TP-02 qualification. It owns native typed object, field, relation, action, permission and view/component definitions. The platform release envelope references that native bundle and adds only task-specific evidence/decision states, source mappings, capability verification, readiness and action-safety/reconciliation records. The project must not create parallel object/action/permission/query/view schemas. This is not a universal knowledge graph or general OWL reasoner. The combined release references:
 
-1. **Object type:** stable ID, business label, field schema, sensitivity, source authority, retention, and allowed references.
-2. **Relationship:** stable ID, typed endpoints, cardinality, mapping rule, and validity/evidence policy.
-3. **Rule:** ID, plain-language explanation, machine-checkable predicate or approved validator reference, scope, severity, owner, evidence, status, and test cases.
-4. **Query capability:** inputs, output schema, allowed filters/sorts, source plan, freshness/partial-result semantics, sensitivity, and budgets.
-5. **Action capability:** source business operation ID, typed input, preview semantics, required rules, effect descriptor builder, confirmation/approval policy, idempotency and reconciliation contract, and retry safety.
-6. **Application specification:** routes, role visibility declarations, approved components, and capability bindings.
-7. **Source mapping:** source system, resource, field mapping, identity mode, authority ranking, transforms, and version.
+1. **Native ObjectStack bundle:** native objects, relations, actions, permissions, query/view and component definitions; the platform stores its exact runtime version and digest.
+2. **Task evidence extension:** goal, source/file passages, provenance state, business-owner decision references, rule-test references and revision history.
+3. **Connector and source mapping extension:** source catalog and operation references mapped to native object/field/action IDs, with identity scope, authority, transform, verification and version.
+4. **Action safety extension:** native action ID linked to effect builder, automation policy, confirmation/approval requirements, idempotency/reconciliation contract and retry evidence.
+5. **App release manifest:** immutable references to native view/component IDs, optional narrow route/layout composition, component catalog, connector contracts and deployment artifact. It never redefines view or permission semantics.
 
 ## Ontology authoring and verification lifecycle
 
@@ -35,9 +33,9 @@ The visual workbench provides (a) object/relation graph, (b) source-to-business 
 
 This workbench deliberately keeps model extraction separate from runtime semantics. The model may draft a package, but only the server validator determines whether it is structurally valid; only the business owner confirms meanings; only the administrator grants a source; only the publisher releases a tested revision.
 
-The platform extension is validated together with ObjectStack metadata: references resolve; types line up; required rules are defined; UI binds only to declared capability IDs; required approval roles exist; source identity and action safety are evidenced. `draft` and `published` releases are separate. A published release is immutable and records both ObjectStack metadata digest and platform-extension digest; changes create a new version.
+The native bundle is validated by the qualified ObjectStack validators. The platform extension validator checks only extension fields and cross-boundary invariants: references resolve; source mapping types agree with native IDs; required decisions exist; UI binds only to native view/capability IDs; required approval roles exist; source identity and action safety are evidenced. `draft` and `published` releases are separate. A published release is immutable and records the native metadata digest plus platform-extension and app-release digests; changes create a new version.
 
-Do not allow model-authored JavaScript, SQL, regular expressions with unbounded runtime, policy scripts, or arbitrary connector code inside a package. If computed rules are needed, add a small, typed, resource-bounded expression language with a reviewed grammar and versioned semantics.
+Do not allow model-authored JavaScript, SQL, regular expressions with unbounded runtime, policy scripts, or arbitrary connector code inside a package. Use a qualified native rule/predicate mechanism. If it cannot express a required rule safely, record a framework gap and decide through an ADR before adding any narrowly typed validator; do not create a parallel general-purpose rule language.
 
 ## Domain ownership and command model
 
