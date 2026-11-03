@@ -362,6 +362,123 @@
         "External feedback updates documentation and prioritization."
       ],
       "evidence": "CONTRIBUTING.md"
+    },
+    {
+      "id": "TP-17",
+      "title": "Deliver low-friction connector onboarding and compatibility report",
+      "milestone": "M2",
+      "status": "planned",
+      "dependsOn": [
+        "TP-02",
+        "TP-05",
+        "TP-06"
+      ],
+      "requirementIds": [
+        "PR-03",
+        "PR-15",
+        "PR-16"
+      ],
+      "acceptance": [
+        "Admin can import a supported OpenAPI document or configure a REST endpoint and choose an explicitly safe read operation.",
+        "Connection report separately shows reachability, authentication, schema discovery, read verification, operation scopes, limits, support tier, and known gaps.",
+        "Credentials are stored by secret reference and never enter Agent context or AppSpec artifacts.",
+        "Import and test paths enforce host allowlists, SSRF protections, request/response limits, timeouts, and do not execute source writes.",
+        "One described and one manually configured synthetic source pass the connector contract suite; unsupported protocol/auth cases identify the extension route."
+      ],
+      "evidence": "docs/architecture/DATA-ARCHITECTURE.md; docs/adr/0007-connector-onboarding-and-compatibility.md"
+    },
+    {
+      "id": "TP-18",
+      "title": "Build evidence-backed ontology authoring workbench",
+      "milestone": "M2",
+      "status": "planned",
+      "dependsOn": [
+        "TP-03",
+        "TP-04",
+        "TP-05",
+        "TP-17"
+      ],
+      "requirementIds": [
+        "PR-02",
+        "PR-17"
+      ],
+      "acceptance": [
+        "Authorized schema and synthetic business files can produce proposed objects, relations, mappings, rules, and exceptions.",
+        "Each proposal retains source/page/path evidence and an explicit provenance state; Agent confidence cannot promote it to confirmed.",
+        "Users can inspect and edit the model through graph/table/form views without authoring ontology code.",
+        "Business owner confirmation is attributable, versioned, and distinct from publisher approval or source grants.",
+        "File access, extraction, retention, deletion, MIME/size limits, and untrusted-content handling are explicit."
+      ],
+      "evidence": "docs/architecture/BUSINESS-ARCHITECTURE.md; docs/architecture/DATA-ARCHITECTURE.md"
+    },
+    {
+      "id": "TP-19",
+      "title": "Implement visual model validation, cases, and read-only dry run",
+      "milestone": "M2",
+      "status": "planned",
+      "dependsOn": [
+        "TP-07",
+        "TP-08",
+        "TP-18"
+      ],
+      "requirementIds": [
+        "PR-18"
+      ],
+      "acceptance": [
+        "Workbench displays source-to-domain mappings, graph relationships, conflicts, package diff, test cases, and actionable blockers.",
+        "Validator checks structural references, types/units, required confirmations, sensitivity/authorization, bounded rules, and capability safety.",
+        "Synthetic cases cover positive, negative, edge, stale, partial, conflict, denied access, and connector failure.",
+        "Connected-data trial uses authorized reads only; instrumentation/evidence proves the action execute port was not invoked.",
+        "Publish is blocked for required unresolved or failed gates and reports the responsible role and affected capability."
+      ],
+      "evidence": "docs/product/UX-SPEC.md; docs/architecture/BUSINESS-ARCHITECTURE.md"
+    },
+    {
+      "id": "TP-20",
+      "title": "Add action automation modes and policy simulator",
+      "milestone": "M4",
+      "status": "planned",
+      "dependsOn": [
+        "TP-06",
+        "TP-11",
+        "TP-19"
+      ],
+      "requirementIds": [
+        "PR-08",
+        "PR-20"
+      ],
+      "acceptance": [
+        "Every action has one explicit mode and a versioned policy covering actor, environment, effect bounds, evidence freshness, source safety, expiry, budget, and separation of duties.",
+        "Server reevaluates current policy/authorization at each transition and dispatch; clients and models cannot upgrade mode.",
+        "Simulator reports routing and exact failed guard across safe, denied, stale, conflicting, expired, revoked, connector-drift, and unknown-outcome cases.",
+        "Guarded autonomous mode is rejected unless business-owner/publisher approval, deterministic bounds, and connector idempotency/reconciliation evidence exist.",
+        "Audit identifies policy revision, guards and the decision path; simulator output itself grants no authority."
+      ],
+      "evidence": "docs/architecture/ACTION-STATE-MACHINE.md; docs/adr/0009-action-automation-modes.md"
+    },
+    {
+      "id": "TP-21",
+      "title": "Build and promote immutable generated task app releases",
+      "milestone": "M5",
+      "status": "planned",
+      "dependsOn": [
+        "TP-09",
+        "TP-10",
+        "TP-14",
+        "TP-20"
+      ],
+      "requirementIds": [
+        "PR-10",
+        "PR-19"
+      ],
+      "acceptance": [
+        "AppSpec supports conventional business pages and Agent collaboration surfaces using only a versioned allowlisted component registry.",
+        "AG-UI carries Agent interaction events but does not define the canonical app schema, action authorization, or release artifact.",
+        "Publisher produces reproducible signed/digested OCI or static release with pinned AppSpec, package, policy, component catalog and API compatibility references.",
+        "Same artifact digest is promoted across environments; runtime secret references, grants, identity and permissions remain environment-specific and current.",
+        "Generated apps pass role simulation, keyboard/accessibility, denied-binding, revocation, and clean deployment checks."
+      ],
+      "evidence": "docs/adr/0008-appspec-release-artifact.md; docs/product/UX-SPEC.md; docs/architecture/SYSTEM-ARCHITECTURE.md"
     }
   ]
 }

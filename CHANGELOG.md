@@ -8,4 +8,6 @@ All notable changes will be recorded here. This project is pre-release and has n
 - Added business, system, data, API, domain-package, action-state, authorization, security and operations architecture.
 - Added reuse-first framework review with ObjectStack qualification gate, BMAD-informed planning process, backlog and roadmap.
 - Clarified that runtime adoption and external security/user validation remain unverified.
+- Defined business objective and proposed pilot acceptance, connector compatibility tiers/onboarding, evidence-backed ontology authoring/validation, immutable AppSpec deployment, and per-action automation modes.
+- Added ADR-0007 through ADR-0009 and TP-17 through TP-21 for the new design requirements; these remain proposed/planned and are not implemented evidence.
 

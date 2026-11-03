@@ -2,7 +2,7 @@
 
 The canonical product documents are:
 
-- [Product strategy](product/PRODUCT-STRATEGY.md): audience, positioning, strategy, outcomes, boundaries and community goals.
+- [Product strategy](product/PRODUCT-STRATEGY.md): audience, positioning, business objective, measurable pilot acceptance, boundaries and community goals.
 - [Product requirements](product/PRD.md): personas, journey, functional and non-functional requirements, first workflow and release UX gate.
 - [UX specification](product/UX-SPEC.md): guided builder, readiness matrix, controlled app renderer and operational states.
 - [Business architecture](architecture/BUSINESS-ARCHITECTURE.md): business roles, authority and executable shared contract.

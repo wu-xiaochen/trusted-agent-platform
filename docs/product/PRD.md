@@ -42,12 +42,22 @@ This document defines product behavior for the first end-to-end release. It does
 | PR-12 | Honest readiness | Read, draft, preview, submit, and recovery readiness are displayed separately with actionable reasons. No single trust score substitutes for these states. |
 | PR-13 | Audit and operations | Authorized operators can trace actor, request, package, policy, connector, effect, approval, source result, and recovery decisions with secret and content redaction. |
 | PR-14 | Self-hosted operation | A documented local Compose deployment starts the platform, database, and durable coordinator with health checks, backup guidance, and explicit production configuration. |
+| PR-15 | Low-friction, honest source onboarding | An integration administrator can import a supported API description or configure a supported source, set credentials in a secret-safe flow, inspect discovered operations, test a bounded sample, and see an explicit support tier and verified capability report before granting use. No source is called compatible from URL reachability alone. |
+| PR-16 | Broad connector compatibility through tiers | The product exposes a documented native/beta/custom/unsupported matrix and a versioned connector contract. Native protocol coverage is prioritized over claims of universal compatibility; an unsupported adapter fails with a precise reason and extension path. |
+| PR-17 | Evidence-backed ontology authoring | An Agent can propose business objects, relations, rules, and mappings from authorized schemas and uploaded business files; each proposal records provenance and is visibly separated from source-observed and human-confirmed facts. |
+| PR-18 | Visual validation and safe trial run | A user can inspect the domain graph and field mappings, resolve conflicts, compare revisions, run schema/rule/permission checks and synthetic cases, and perform read-only dry runs. Dry runs cannot execute source writes. Publish is blocked for unresolved required definitions or failed safety checks. |
+| PR-19 | Frozen, deployable task applications | An Agent can draft traditional task screens and Agent collaboration screens as a validated declarative AppSpec bound to published capabilities. App releases are immutable and deployable as a versioned OCI image or platform-hosted package; runtime permissions, connector grants, and secrets remain external and current. |
+| PR-20 | Explicit automation and human decision policy | Each action is configured as read-only, prepare-only, requester-confirmed, approval-required, guarded-autonomous, or manual-only. A policy simulator shows the selected path and reason. Model confidence never grants an automation mode; unknown, stale, conflicting, revoked, or unreconciled states fail closed. |
 
 ## First task definition
 
 **Maintenance preparation and spare-parts request** uses a work-order source and an inventory source. It can locate a work order, identify relevant equipment/part relationships, show stock with freshness/source, and prepare a request. The first write-capable release submits a request through the source system's business API. It does not claim the request is approved, that stock is reserved, or that a maintenance plan is safe to execute.
 
 The example must include: no matching asset; ambiguous part mapping; stale inventory; partial source outage; insufficient stock; an unresolved approval rule; duplicate submit; source timeout after source acceptance; and source API without idempotency/reconciliation. Cases that cannot be safely completed stop and explain why.
+
+## Product promise and boundary
+
+The product promise is: connect an enterprise capability, explain its business meaning, prove the task on representative cases, and publish a controlled application without replacing the source system. “Broad compatibility” means a clear adapter path and tested capability matrix, not every legacy system working without configuration. “Ontology” means the small, executable business contract needed by a task, not an enterprise-wide knowledge graph project. AG-UI is an interaction/event protocol for Agent-facing experiences; the platform's canonical application format is its validated AppSpec and component registry.
 
 ## Non-functional requirements
 

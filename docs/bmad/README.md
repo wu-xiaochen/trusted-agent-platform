@@ -27,6 +27,8 @@ Every implementation task should include:
 
 Ask the coding agent to inspect relevant source and report assumptions before broad edits. For security-sensitive work, have a separate reviewer examine the trust boundary and failure path. Never let the same generated patch both redefine the requirement and declare itself compliant.
 
+The repository is designed for AI-assisted implementation, not blind acceptance of a single prompt across the whole platform. An autonomous coding run may implement only the currently selected TP item and its linked ready spec. It must stop before work that depends on a proposed/unqualified ADR, missing source contract, unclear authority, or unapproved policy choice. It must not mark backlog items done or claim tests pass without the recorded evidence. A finished implementation handoff includes the code/artifact, changed contracts/migrations as applicable, meaningful success and denied/failure tests, exact commands/results, security review notes, docs/changelog/progress update, and known gaps. Human review remains mandatory for identity, permissions, data scopes, action state, dependencies, migrations, and releases.
+
 ## Planning artifacts
 
 | Artifact | Canonical location |

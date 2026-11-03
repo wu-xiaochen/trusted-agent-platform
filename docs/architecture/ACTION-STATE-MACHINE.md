@@ -65,3 +65,9 @@ Temporal workflow orchestrates timers, waits, retries after known-safe result, a
 
 A connector must state whether it supports: stable client key; source-side deduplication duration; lookup by that key; conditional write/version check; cancellation; authoritative result query; and business approval/state lifecycle. The action validator maps the combination to allowed behavior. High-impact command without stable idempotency or authoritative reconciliation is manual-only.
 
+## Automation mode contract
+
+The immutable action definition names exactly one mode: `read_only`, `prepare_only`, `requester_confirmed`, `approval_required`, `guarded_autonomous`, or `manual_only`. The published policy additionally binds the mode to environment, actor/role scope, impact class, allowed target and value bounds, freshness/completeness predicates, business rules, request budget, expiry, separation-of-duty, and connector safety evidence. Runtime policy may become more restrictive immediately; relaxing it requires a new reviewed policy revision and release/promotion path.
+
+`guarded_autonomous` is valid only when a named business owner and authorized publisher approve deterministic, testable preconditions and bounded impact, and the connector supports the required idempotency/reconciliation. It is disabled for unknown/conflicting facts, stale/partial inputs beyond declared thresholds, policy service failure, permission uncertainty, schema drift, effect changes, or unresolved outcomes. Model confidence, model-generated rationale, AG-UI events, or Skill/MCP text cannot select or upgrade a mode. A policy simulation reports expected routing over test cases but cannot publish or authorize runtime execution.
+

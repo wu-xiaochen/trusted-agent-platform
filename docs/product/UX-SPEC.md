@@ -30,9 +30,13 @@ Ask: “What should be true when this task is complete?” Offer templates with 
 
 Show proposed objects and relationships as editable cards with source evidence. User-facing statuses are `From your material`, `Suggested`, `Needs confirmation`, `Conflicting information`, and `Confirmed`. Do not display internal ontology jargon as the only way to understand the page.
 
+The business terms workspace is a visual evidence workbench: a graph view for objects/relationships, a mapping table from source fields to business terms, a rules/exceptions list, a revision diff, and a test evidence panel. Users can switch between visual and form views; neither requires writing an ontology language. Every proposed item opens its supporting file passage, schema field, or sample record. Agent proposals remain marked as suggestions until the business owner confirms them. Conflicting definitions are shown side by side with impact and owner, never silently merged.
+
 ### 3. Systems and access
 
 For each source: business name; system owner; connection status; identity/delegation mode; available operations; data scope; last verification; rate/size limits; and known gaps. Credentials are entered only in a secure connection setup view and stored by reference. Do not present secrets back to the browser after save.
+
+The onboarding wizard accepts a supported API description/collection, an endpoint plus manual schema, database connection profile, or approved business file. It shows a support tier before setup and walks the admin through inspect operations → choose auth mode → enter credential into a secret reference → run a safe test → select capabilities → map business meaning. Test requests are bounded and use an administrator-selected sample/read operation; write operations are never run as connection tests. The report distinguishes network reachability, identity verification, schema discovery, read test, and command safety. Unsupported auth/protocol details name the custom connector route.
 
 ### 4. Rules and exceptions
 
@@ -42,9 +46,13 @@ Use a plain-language rule, one representative example, and the consequence if th
 
 Run against synthetic fixtures first. A result panel presents the answer, provenance, timestamps, truncation/partial status, rules applied, and capabilities exercised. A preview cannot submit. The UI must never label a preview as a successful business operation.
 
+The validation workbench groups checks into contract, mapping, rule, authorization, freshness/completeness, and action-safety cases. Users can use Agent-suggested positive, negative, and edge tests, but a business owner accepts expected business results. “Try with connected data” is explicitly read-only, scoped to the current user's access, and indicates whether it used fixtures, a sample, or a live query. A dry run cannot invoke an action connector's `execute` port.
+
 ### 6. Application studio
 
 Generate a useful first draft automatically. Allow edits to page order, headings, catalog component choice, permitted fields, and task instructions. Do not expose arbitrary JSX, JavaScript, SQL, or unrestricted tool definitions. Every binding points to a published query/action ID.
+
+The studio supports conventional work pages (search/list, record detail, guided form, task inbox, approval, status/history, and bounded report) alongside Agent surfaces (conversation, evidence panel, proposed plan, clarification, tool progress, confirmation and escalation). Generated pages are editable through the component/layout editor and remain bound to the same business package. AG-UI streams the Agent experience where selected; it does not define or compile the page. The release preview simulates each role and viewport before publish.
 
 ### 7. Readiness and publish
 
@@ -59,6 +67,8 @@ Use a capability matrix, not a scalar score:
 | Publish app | Ready for named publisher · package revision shown |
 
 Every blocked state identifies the missing evidence and whether the next action belongs to the business owner, source administrator, or publisher.
+
+For each action, show its configured mode (`read-only`, `prepare-only`, `requester-confirmed`, `approval-required`, `guarded-autonomous`, `manual-only`), rationale, boundaries, test coverage, and owner. A policy simulator shows which cases auto-run, pause for requester confirmation, enter approval, or stop, with the exact guard that determined the path. The publish review pins AppSpec, component registry, package, connector contracts, automation policy and API compatibility versions. It creates a signed/digested immutable release artifact; promotion reuses the same artifact digest. Environment secret references, grants, OIDC and current permissions are injected at runtime, never captured in the artifact.
 
 ### 8. Operate and recover
 
@@ -90,4 +100,6 @@ Initial component kinds: `object-summary`, `field-list`, `table`, `form`, `rule-
 ## Usability acceptance
 
 A user unfamiliar with the product can discover the sample task, run its read-only demo, and explain what would need to change before submit. A person with approval authority can distinguish their approval from the requester’s confirmation. After reconnect, a user can identify whether the operation completed, remains in progress, or has an unknown source outcome.
+
+The onboarding acceptance exercise should include one OpenAPI-described service and one source without a machine-readable API description. Record time to first authorized read, mapping corrections, blockers understood, and whether the admin correctly distinguishes “reachable” from “ready.” Do not publish a universal compatibility claim based on one connector.
 

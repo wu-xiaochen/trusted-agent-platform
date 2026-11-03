@@ -62,3 +62,19 @@ Explicitly out of scope for v1: arbitrary generated code, arbitrary SQL writes, 
 
 Do not add a second durable workflow engine, ontology framework, policy language, or visual flow editor without evidence from at least two real task deployments. Do not claim that business users can configure the system unaided until observed sessions show they can identify blockers, review proposed rules, and correctly interpret operation states.
 
+
+## Business objective and measurable acceptance
+
+**Business objective:** reduce the time and specialist effort required for an enterprise solution architect to turn one cross-system business task into a tested, permission-aware, operable application, while preserving source-system authority and making every unsafe/unknown path visible.
+
+**North-star measure:** time from a task owner selecting a supported task to the first validated, role-tested task application over real authorized read capabilities. Record both elapsed time and human touch time, with blockers/dependencies attributed to the party that owns them. Compare against the customer's documented current approach when one exists; do not claim improvement from an unmeasured baseline.
+
+**Pilot acceptance (proposed targets, to be checked in formative research before public claims):**
+
+- A solution architect can connect two supported source instances and complete a cross-source read workflow with no code changes to the platform, using standard UI configuration and mappings.
+- One business owner can review evidence, confirm required meanings/rules, inspect at least one conflicting/unknown case, and correctly explain why a capability is blocked or ready.
+- A requester can use the resulting traditional/Agent-assisted task UI and identify its data sources, freshness, next safe step, and whether an action needs confirmation/approval.
+- All documented denied-path scenarios reject the unauthorized request; no test case completes a source write outside the authenticated action boundary. This is a release invariant, not a statistical target.
+- The same kernel supports the second task domain without copying the permission/action runtime. External install and connector-extension feedback is recorded before a stable 1.0 claim.
+
+During initial user studies, establish actual baseline and reasonable time/effort thresholds; until then record metrics without a pass/fail productivity claim. Product-market fit, GitHub ranking, universal compatibility, and zero customer effort cannot be guaranteed by design.

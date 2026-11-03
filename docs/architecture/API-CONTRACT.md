@@ -18,12 +18,17 @@
 |---|---|---|
 | Task templates and drafts | `GET /task-templates`, `POST /task-drafts`, `PATCH /task-drafts/{id}` | Configure task draft and clarification answers |
 | Connections | `POST /connections`, `POST /connections/{id}:verify`, `GET /connections/{id}/capabilities` | Admin-owned setup and source readiness |
+| Connector catalog | `GET /connector-types`, `POST /connections:import`, `POST /connections/{id}:discover`, `POST /connections/{id}:test`, `GET /connections/{id}/support-report` | Import an API description/collection or configure a known adapter; discovery and sample calls are bounded, and support tier is explicit |
+| Business files | `POST /business-files:upload`, `GET /business-files/{id}`, `POST /business-files/{id}:extract`, `DELETE /business-files/{id}` | Upload a bounded file with an explicit access scope; inspect extraction/provenance and delete it under retention policy |
 | Domain packages | `POST /packages/{id}/validate`, `POST /packages/{id}/publish`, `GET /releases/{id}` | Validate and publish immutable contract |
+| Ontology workbench | `POST /packages/{id}/proposals`, `GET /packages/{id}/evidence`, `POST /packages/{id}/mappings:validate`, `POST /packages/{id}/tests:run` | Create evidence-linked proposals, inspect mappings, and run synthetic/read-only validation |
 | Queries | `POST /apps/{appId}/queries/{capabilityId}:execute` | Execute bounded, authorized query |
 | Runs | `POST /apps/{appId}/runs`, `GET /runs/{runId}`, `GET /runs/{runId}/events` | Start/read a conversational or task run |
 | Actions | `POST /action-intents`, `POST /action-intents/{id}:preview`, `POST /action-intents/{id}:confirm`, `POST /action-intents/{id}:submit` | Server-resolved effect lifecycle |
 | Approvals | `POST /approvals/{id}:decide`, `GET /approvals` | Separate business approval queue |
 | Applications | `POST /app-specs:validate`, `POST /app-specs/{id}:publish`, `GET /apps/{id}/releases/{releaseId}` | Validate and release controlled UI |
+| App release/deployment | `POST /apps/{id}/releases:build`, `GET /apps/{id}/releases/{releaseId}/artifact`, `POST /apps/{id}/releases/{releaseId}:promote` | Build immutable OCI/static artifact and promote the same digest between environments; no secrets or grants are embedded |
+| Automation policies | `POST /actions/{actionId}/policy:simulate`, `POST /actions/{actionId}/policy:publish`, `GET /actions/{actionId}/policy` | Simulate and version human/automation gates; only authorized owners/publishers can publish policy |
 | Extensions | `POST /extensions`, `POST /extensions/{id}:verify`, `POST /extensions/{id}:grant` | Register, inspect, and grant MCP/Skill capabilities |
 | Operations | `GET /health/live`, `GET /health/ready`, `GET /operations/{id}` | Health and durable operation status |
 
@@ -64,7 +69,7 @@ Document which errors are retryable by clients; clients do not retry `OUTCOME_UN
 
 The run event stream uses named, versioned events with `runId`, monotonically increasing `sequence`, `occurredAt`, and a typed payload. Reconnection supports `Last-Event-ID`; clients refetch current state if a gap is detected. Do not emit secrets or raw retrieved documents by default.
 
-AG-UI can carry agent lifecycle, text, tool proposal, and state update events between the runtime and React shell. Platform capability requests remain typed internal service calls. A front-end event that says “tool approved” or “action succeeded” is informational only until the API ledger confirms it.
+AG-UI is an event-based, bidirectional connection between Agent backends and user-facing clients; it can carry lifecycle, text, typed UI intent/state, tool handoff and human-interrupt interactions. It is not the canonical app definition, authorization kernel, or deployable application package. The platform's canonical release input is a validated AppSpec and component registry; AG-UI is an optional stream/interaction adapter. A2UI or similar declarative widget protocols may be evaluated as a transport/rendering aid, but AppSpec validation and platform permissions remain authoritative. Platform capability requests remain typed service calls. A front-end event that says “tool approved” or “action succeeded” is informational only until the API ledger confirms it. This separation follows AG-UI's own positioning as the Agent↔User interaction protocol, while distinguishing generative UI specifications such as A2UI ([AG-UI overview](https://docs.ag-ui.com/introduction)).
 
 ## MCP exposure and consumption
 

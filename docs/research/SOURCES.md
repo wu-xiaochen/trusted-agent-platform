@@ -15,6 +15,8 @@
 - [Dify repository](https://github.com/langgenius/dify) — workflow, Agent and RAG authoring reference. Its [official license file](https://github.com/langgenius/dify/blob/main/LICENSE) adds conditions for multi-tenant use and frontend branding; inspect the exact release license before reuse or distribution.
 - [OpenSPG](https://github.com/OpenSPG/openspg) and [KAG](https://github.com/OpenSPG/KAG) — domain semantic graph, knowledge construction and reasoning references.
 - [AG-UI protocol](https://github.com/ag-ui-protocol/ag-ui/blob/main/docs/ag_ui.md) — event-based Agent/user interaction concepts. Its event semantics are not platform authorization.
+- [AG-UI overview](https://docs.ag-ui.com/introduction) — distinguishes the Agent↔User event protocol from generative UI specifications such as A2UI. Checked 2026-11-03.
+- [OpenAPI Specification v3.2.1](https://spec.openapis.org/oas/v3.2.1.html) — language-agnostic HTTP API description useful for discovery; it does not verify source semantics, permissions, or operation safety. Checked 2026-11-03.
 - [MCP 2026-07-28 specification notes](https://blog.modelcontextprotocol.io/posts/2026-07-28/) — current authorization/protocol evolution at review time. Verify the official stable protocol revision and SDK support at implementation.
 - [MCP TypeScript SDK authorization](https://ts.sdk.modelcontextprotocol.io/v2/serving/authorization) — HTTP MCP server as OAuth resource server; token validation and protected resource metadata.
 - [Temporal TypeScript SDK](https://docs.temporal.io/develop/typescript) — workflow/activity development for durable execution.

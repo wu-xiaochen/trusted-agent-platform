@@ -20,6 +20,21 @@ Each implementation issue defines the behavior, acceptance evidence, security/da
 
 These are design requirements for future implementation PRs. They are not evidence that current runtime code has passed them.
 
+## Product-level acceptance and implementation handoff
+
+Every implementation change must deliver a user-visible or maintainability outcome tied to a stable TP/PR ID. A code-only patch is incomplete when its API/schema, permission contract, runbook, failure states, or source capability report is part of the user outcome. Before marking a TP done, record:
+
+1. The changed executable artifact (code, migration, connector, app release, or deployment profile) and exact version/digest where applicable.
+2. Success, unauthorized, malformed, partial, stale/conflicting, and recovery test evidence relevant to that task.
+3. Exact commands run and actual pass/fail output; identify static checks separately from runtime authorization or deployment verification.
+4. Security/data review: identity used, data exposed, source authority, secret handling, side effects/retry ownership, and residual risks.
+5. Updated public API/schema/ADR/migration documents, user documentation, changelog, backlog state and progress evidence.
+6. Known limitations and disabled capabilities; do not label a mocked provider or synthetic connector as real integration support.
+
+The product outcome is not considered achieved because an Agent generated code or a page. For the first release, evidence must show a supported source profile, an authorized cross-source read, owner-reviewed task model, validated cases, a role-tested AppSpec, and operational self-hosted deployment. A write-capable release additionally needs the action/reconciliation/security gates in M4 and a named source-specific safety review. Do not enable guarded autonomy just because the model completed a happy-path demo.
+
+When AI coding is used, one TP is the maximum product WIP. The selected story defines the exact files/contracts likely to change and a narrow outcome. The coding agent may not silently choose among proposed ADR alternatives, bypass prerequisite gates, broaden a connector claim, alter a role/action state model, or close future backlog work. If it finds an unstated decision, it reports the gap and stops the dependent code path while preserving independent progress.
+
 ## Planned tooling
 
 - **Unit/integration:** Vitest for TypeScript unit tests; PostgreSQL integration tests with Testcontainers or the same versioned Compose image used in CI.

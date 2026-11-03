@@ -27,11 +27,18 @@ Deny overrides allow. A missing/unknown attribute, expired grant, schema mismatc
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | Manage OIDC, members, platform policy | ✓ | — | — | — | — | — | — | — | — |
 | Configure connection and secret reference | ✓ | ✓ | — | — | — | — | — | — | — |
+| Import/discover/test a connection | ✓ | ✓ | — | — | — | — | — | Scoped health only | — |
 | Inspect source catalog/connection health | ✓ | ✓ | Scoped | — | — | — | — | ✓ | Read-only audit scope |
+| Upload/read business file | Scoped | Scoped | Scoped task | Scoped task | — | Published-app scope | — | — | — |
 | Create/edit task draft and mappings | ✓ | Scoped | ✓ | Review/confirm business meaning | — | — | — | — | — |
+| Generate ontology proposals from authorized inputs | ✓ | Scoped | ✓ | ✓ | — | — | — | — | — |
+| Confirm task ontology/rules | Scoped | — | Only if separately assigned owner | ✓ | — | — | — | — | — |
 | Confirm business rules | Scoped | — | Only if separately assigned owner | ✓ | — | — | — | — | — |
 | Run read/test case | ✓ | ✓ | ✓ | ✓ | Scoped | Published-app scope | Scoped | Scoped | Read-only scope |
+| Simulate action automation policy | Scoped | Connector evidence only | Scoped | ✓ | ✓ | — | Scoped review only | — | — |
+| Publish/raise action automation mode | — | — | — | ✓ for owned business scope | ✓ after owner decision | — | — | — | — |
 | Publish app/package | ✓ | — | — | Review required rules | ✓ | — | — | — | — |
+| Build/promote app release artifact | — | Environment config only | — | — | ✓ | — | — | Deploy only if assigned | — |
 | Request business action | Scoped | — | — | — | — | ✓ | — | — | — |
 | User confirmation | — | — | — | — | — | ✓ for own request | — | — | — |
 | Business approval | — | — | — | — | — | — | ✓ under policy | — | — |
@@ -47,7 +54,10 @@ High-impact policy may require requester/approver separation and rule owner/publ
 | Read a query capability | API entry and source call | Filter row/field scope before result enters app/model; enforce time/byte/row budget |
 | Retrieve document or time-series data | Before retrieval and before context assembly | Current source ACL, classification allowed by selected provider, bounded time/window |
 | Draft a task or AppSpec | Current editor role | Model-generated draft is untrusted and cannot create grants |
+| Extract business-file content | File reader permission and workspace scope before parser; recheck before model context | Upload scope and retention are explicit; file contents are untrusted; deletion/revocation propagates to extracted text and indexes |
+| Propose ontology terms/mappings | Current task editor plus read access to every input | Proposals preserve evidence and cannot confirm meaning, set permissions or publish |
 | Confirm a rule | Confirming principal and rule owner at write | Evidence, rule revision and scope recorded; required owner role |
+| Publish action automation policy | Business owner for the action and publisher for the release | Mode increase requires both decisions, exact revision, passing policy cases, current connector safety evidence and source permission; no self-approval when policy prohibits it |
 | Publish package/app | Publisher at publish transaction | Required rules confirmed, references valid, source grants ready, digest and review recorded |
 | Preview action | Current requester and action scope | Read-only preview may query source; no source command |
 | Confirm an effect | Requester at confirmation | Exact effect digest, target, release, expiry and current role |

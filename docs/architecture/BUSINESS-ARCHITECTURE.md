@@ -27,6 +27,14 @@ The published application metadata is the shared boundary across interaction sur
 6. **Application specification:** routes, role visibility declarations, approved components, and capability bindings.
 7. **Source mapping:** source system, resource, field mapping, identity mode, authority ranking, transforms, and version.
 
+## Ontology authoring and verification lifecycle
+
+The user builds a task-sized executable model through an evidence workbench, not a blank ontology editor. Inputs are imported source schemas, approved sample records, data dictionaries, process documents, forms, and user explanations. The Agent produces proposals for objects, relations, field mappings, units, constraints, rules, and action meaning. Every node and mapping has a provenance class: `source_observed`, `agent_proposed`, `owner_confirmed`, `conflicting`, or `unknown`, plus source/file/page/path references and revision. Confidence is a triage hint only; it never changes the provenance class or publish permission.
+
+The visual workbench provides (a) object/relation graph, (b) source-to-business field mapping table, (c) rule and exception editor, (d) impact/dependency view, (e) revision diff, and (f) test/evidence panel. Validation is layered: structural schema and reference checks; mapping type/unit/nullability checks; required business-owner confirmation; data sensitivity and permission checks; bounded-expression and resource checks; capability/readiness checks; and positive, negative, edge, stale, partial, and denied-access cases. A dry run may read only authorized sources or synthetic fixtures and evaluates mappings/rules without a command port. Publish creates an immutable package digest only after required gates pass. A failure report points to the exact object, relation, mapping, rule, case, or permission decision and names the resolving role.
+
+This workbench deliberately keeps model extraction separate from runtime semantics. The model may draft a package, but only the server validator determines whether it is structurally valid; only the business owner confirms meanings; only the administrator grants a source; only the publisher releases a tested revision.
+
 The platform extension is validated together with ObjectStack metadata: references resolve; types line up; required rules are defined; UI binds only to declared capability IDs; required approval roles exist; source identity and action safety are evidenced. `draft` and `published` releases are separate. A published release is immutable and records both ObjectStack metadata digest and platform-extension digest; changes create a new version.
 
 Do not allow model-authored JavaScript, SQL, regular expressions with unbounded runtime, policy scripts, or arbitrary connector code inside a package. If computed rules are needed, add a small, typed, resource-bounded expression language with a reviewed grammar and versioned semantics.
@@ -52,6 +60,12 @@ Decisions are separate and attributable:
 - **Source authorization:** connection identity is permitted to perform the source operation.
 
 No one decision silently implies another. For high-impact operations, enforce separation of duties in policy (for example, requester cannot approve their own request) and record the policy revision used.
+
+### Automation modes per action
+
+Each published action declares one of six modes, scoped by action and environment: **read-only** (no source mutation); **prepare-only** (Agent may draft/preview, a human performs the source action elsewhere); **requester-confirmed** (the authenticated requester confirms the server-resolved effect each time); **approval-required** (requester confirmation plus an authorized, separately attributable approver); **guarded-autonomous** (no per-run human confirmation only when a named owner has approved deterministic limits, predicates, source permissions, idempotency/reconciliation, and monitoring); or **manual-only** (the platform can explain and prepare but never submit).
+
+The policy contains the reason/impact class, eligible actors, environment, amount/quantity/target limits, freshness and completeness requirements, required predicates, separation-of-duty rules, budget/rate limits, expiry, and connector safety evidence. The server evaluates policy before every transition and again at dispatch. The Agent can request a capability but cannot choose or weaken its mode. Model confidence cannot substitute for required evidence or a human decision. Missing policy service, stale/conflicting data, changed effect, unknown source outcome, connector drift, denied access, or failed reconciliation blocks automation. A simulator runs proposed policy against synthetic and historical redacted cases and reports path, unmet guard, and expected human step; a simulation is evidence for review, not approval.
 
 ## Canonical action lifecycle
 
