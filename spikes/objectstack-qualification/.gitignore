@@ -1,0 +1,14 @@
+# Spike-local artifacts — never commit (see AGENTS.md: no .env, credentials, local data)
+.env
+.env.*
+!.env.example
+local/
+data/
+pgdump/
+*.sql.bin
+coverage/
+.nyc_output/
+test-results/
+
+# The upstream clone is fetched by scripts/fetch-upstream.sh into repo-level work/
+# (already ignored); nothing under this directory vendors upstream source.

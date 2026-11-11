@@ -1,0 +1,40 @@
+{
+  "envelopeVersion": "1.0.0",
+  "taskId": "maintenance-preparation",
+  "taskVersion": "0.1.0",
+  "lifecycle": "draft",
+  "updatedAt": "2026-11-03T00:00:00Z",
+  "nativeRuntime": {
+    "name": "ObjectStack",
+    "version": "18.2.0",
+    "releaseCommit": "27f38ada498162835c2f1d56e6edabe18910b4ed",
+    "digest": null
+  },
+  "nativeBundleRefs": [
+    { "nativeObjectId": "maint_qual_work_order", "refType": "object" },
+    { "nativeObjectId": "maint_qual_spare_request", "refType": "object" },
+    { "nativeObjectId": "maint_qual_spare_part", "refType": "object", "source": "runtime-provisioned" },
+    { "nativeActionId": "maint_request_spare", "nativeObjectId": "maint_qual_work_order", "refType": "action" },
+    { "nativeViewId": "maint_qual_work_order", "refType": "view" }
+  ],
+  "platformExtension": {
+    "sourceMappings": [
+      {
+        "nativeObjectId": "maint_qual_spare_part",
+        "sourceCatalogEntryId": "inventory.spare_part",
+        "mappingRevision": "20261103-a",
+        "schemaFingerprint": "measured-at-runtime",
+        "identityMode": "installation_service_identity",
+        "provenance": { "state": "live", "observedAt": "2026-11-03T09:00:00Z", "quality": "complete", "fetchedAt": "2026-11-03T09:00:00Z" }
+      }
+    ],
+    "ruleDecisionRefs": [
+      { "ruleId": "request.quantity", "nativeFieldId": "maint_qual_spare_request.quantity", "status": "owner_confirmed" },
+      { "ruleId": "request.approval", "nativeActionId": "maint_request_spare", "status": "unresolved" }
+    ],
+    "readinessEvidenceRefs": [
+      { "capabilityId": "maint.request_spare", "nativeActionId": "maint_request_spare", "state": "granted_to_position", "position": "maint_technician" }
+    ],
+    "automationPolicyRefs": []
+  }
+}

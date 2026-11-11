@@ -1,0 +1,69 @@
+# TP-02 qualification infrastructure — disposable, local-only.
+# Synthetic throwaway credentials come from local/.env (git-ignored); this
+# file declares no secret values. Images are pinned by digest.
+#
+#   docker compose -f infra/compose.yml --env-file local/.env up -d db source-db
+#
+# See scripts/bootstrap-infra.sh for the reproducible bring-up.
+
+name: tp02-qual
+
+services:
+  # Platform store used by the ObjectStack qualification host (managed datasource).
+  db:
+    image: postgres:17@sha256:3b0cda93be7c8dba2ed484d19393d93845dc3dafb88973e248ba8e6d99d784e1
+    environment:
+      POSTGRES_USER: ${PLATFORM_PG_USER}
+      POSTGRES_PASSWORD: ${PLATFORM_PG_PASSWORD}
+      POSTGRES_DB: ${PLATFORM_PG_DB}
+    ports:
+      - "55432:5432"
+    volumes:
+      - tp02_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PLATFORM_PG_USER} -d ${PLATFORM_PG_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  # External business source: a mature database the platform does NOT own.
+  # Inventory schema + a narrow read-only login emulate the EAM/ERP side.
+  source-db:
+    image: postgres:17@sha256:3b0cda93be7c8dba2ed484d19393d93845dc3dafb88973e248ba8e6d99d784e1
+    environment:
+      POSTGRES_USER: ${SOURCE_PG_OWNER}
+      POSTGRES_PASSWORD: ${SOURCE_PG_OWNER_PASSWORD}
+      POSTGRES_DB: ${SOURCE_PG_DB}
+      SOURCE_PG_RO_USER: ${SOURCE_PG_RO_USER}
+      SOURCE_PG_RO_PASSWORD: ${SOURCE_PG_RO_PASSWORD}
+    ports:
+      - "55433:5432"
+    volumes:
+      - tp02_source_pgdata:/var/lib/postgresql/data
+      - ./source-init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${SOURCE_PG_OWNER} -d ${SOURCE_PG_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  # External OIDC test issuer. Real Authorization Code + PKCE flow; throwaway
+  # static users only — the development email login is never used as OIDC evidence.
+  dex:
+    image: ghcr.io/dexidp/dex:v2.42.0@sha256:1b4a6eee8550240b0faedad04d984ca939513650e1d9bd423502c67355e3822f
+    command: ["dex", "serve", "/etc/dex/config.docker.yaml"]
+    ports:
+      - "5556:5556"
+    volumes:
+      - ../local/dex/config.docker.yaml:/etc/dex/config.docker.yaml:ro
+      - tp02_dex_data:/var/dex
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:5556/healthz"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  tp02_pgdata:
+  tp02_source_pgdata:
+  tp02_dex_data:

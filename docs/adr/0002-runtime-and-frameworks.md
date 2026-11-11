@@ -1,9 +1,10 @@
 # ADR-0002: Reuse ObjectStack and Select the Runtime Stack
 
-- **Status:** Proposed pending TP-02 qualification
+- **Status:** Accepted (2026-11-03, TP-02 qualified — bounded conditions below)
 - **Date:** 2026-11-03
 - **Requirements:** PR-04, PR-05, PR-10, PR-14
 - **Backlog:** TP-02
+- **Qualification evidence:** `spikes/objectstack-qualification/OBJECTSTACK-QUALIFICATION.md` (result `qualified`, 35/35 live assertions)
 
 ## Context
 
@@ -47,9 +48,42 @@ If any trust-boundary condition (2-6) fails, reject ObjectStack for the affected
 
 ## Consequences
 
-The product design has a concrete reuse-first stack and a bounded qualification task. Until that task passes, the design is detailed but no implementation team should assume the framework adapter is proven. Exact versions are selected and lockfile committed in TP-02. Do not quote repository popularity as proof of quality.
+The product design has a concrete reuse-first stack. TP-02 pinned the train
+at **18.2.0** (release commit `27f38ada498162835c2f1d56e6edabe18910b4ed`)
+and recorded lockfile/license/version evidence in
+`spikes/objectstack-qualification/`. The result is **qualified**: every
+trust-boundary condition (2–6 above) passed under execution, and adoption
+proceeds under bounded conditions the platform must implement:
+
+1. External source connections are runtime environment config through the
+   datasource admin door with `sys_secret` credentials; the release
+   envelope binds native object IDs to those connections via the narrow
+   task-extension mapping, never inline credentials.
+2. Field security is block-list/union (no deny-veto): package permission
+   sets and lint guidance must keep sensitive fields in narrowly granted
+   sets, and grants caching stays off unless the cluster invalidation bus
+   is wired.
+3. The platform connector layer adds row/byte/time budgets, provenance,
+   freshness and partial-result envelopes; schema fingerprints gate the
+   release flow because federation drift fails closed at boot, not on
+   every live query.
+4. All source writes are named actions with server-canonical effects;
+   effect digest, requester/approver separation, outbox and reconciliation
+   are platform-owned (Temporal adapter), with no sensitive arguments in
+   durable history.
+5. One bounded asymmetry is tracked for upstream follow-up: the MCP
+   `describe_object` tool reports field names/types the caller may not
+   read even though `/meta/object` masks them (values remain protected).
+
+Re-run the spike's executable suite on every framework minor. Do not
+quote repository popularity as proof of quality.
 
 ## Reconsider when
 
-The framework license changes, critical plugins become unavailable or incompatible, security boundaries require a fork, upstream maintenance slows materially, or measured upgrade effort outweighs reuse.
+The framework license changes, critical plugins become unavailable or
+incompatible, security boundaries require a fork, upstream maintenance
+slows materially, measured upgrade effort outweighs reuse, any x.0 minor
+changes the anonymous-deny chain / named-action elevation / external
+write gate / metadata redaction / MCP principal bridge, or a security
+advisory lacks an acceptable patch window.
 

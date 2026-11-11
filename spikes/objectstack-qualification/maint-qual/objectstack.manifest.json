@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.objectstack.dev/template-manifest.json",
+  "name": "maint-qual",
+  "namespace": "maint_qual",
+  "specVersion": "^18.0.0",
+  "displayName": "Maint Qual",
+  "category": "starter",
+  "isStarter": true,
+  "skills": [
+    "objectstack-platform",
+    "objectstack-data"
+  ],
+  "readmePath": "README.md",
+  "scaffold": {
+    "variables": {
+      "appName": {
+        "type": "string",
+        "prompt": "Application name",
+        "default": "my-app"
+      }
+    }
+  }
+}

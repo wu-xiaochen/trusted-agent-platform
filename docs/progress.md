@@ -1,24 +1,25 @@
 # Project Progress
 
-Updated: 2026-11-03 · Phase: M0 product and engineering design baseline · WIP limit: one product task.
-
-| Area | Status | Evidence / next step |
-|---|---|---|
-| Product strategy, PRD and UX | Independent review sharpened the product wedge, proposed measurable pilot hypotheses and identified launch-readiness gaps; none are user-validated | `docs/product/`; user research and target calibration remain under TP-03 |
-| Business and system architecture | Independent review removed the possible parallel ObjectStack/domain/UI schema; release envelope now references native metadata plus narrow extensions | `docs/architecture/BUSINESS-ARCHITECTURE.md`, `DOMAIN-PACKAGE.md`, `SYSTEM-ARCHITECTURE.md`, `ACTION-STATE-MACHINE.md` |
-| Data, API, authorization and security | Connector tiers/onboarding, workbench and deployment contracts documented; no runtime audit | `DATA-ARCHITECTURE.md`, `API-CONTRACT.md`, `AUTHORIZATION-MATRIX.md`, `THREAT-MODEL.md` |
-| Framework and license research | Desk review prepared | `docs/research/FRAMEWORK-REVIEW.md`; ObjectStack preferred but not qualified |
-| Design vulnerability review | Third review added native metadata single-source-of-truth, competitor saturation, GitHub launch readiness, private gateway and typed data-shape risks | `docs/research/DESIGN-REVIEW.md`; TP-02, user research, external installs and implementation evidence remain mandatory |
-| Code architecture and contribution process | Design baseline prepared | `docs/engineering/`, `docs/bmad/`, `AGENTS.md`, ADRs, backlog and story template |
-| AI coding handoff | Execution contract and TP-02 plan added; only TP-02 is currently suitable as the first implementation task | `docs/engineering/AI-CODING-HANDOFF.md`, `docs/superpowers/plans/2026-11-03-runtime-qualification.md` |
-| ObjectStack qualification (TP-02) | Not started | First engineering task; no runtime stack is yet proven or locked |
-| Static task contract tooling | Existing local baseline | `contracts/`, `scripts/`, `tests/`; initial 16 tests were reported passing on 2026-11-02, not rerun for this design update |
-| Product runtime / real connectors / Agent / generated task UI | Not implemented | Planned through TP-03 to TP-21; TP-02 framework qualification gates runtime choices |
-| Git history / GitHub repository | Public repo created; design update prepared for commit | `https://github.com/wu-xiaochen/trusted-agent-platform`, branch `main`; outputs ignored |
-| GitHub launch readiness | Not ready | No runtime/demo/release or independent install evidence; repository Code of Conduct, configured CI/branch protection, and accurate topics remain before launch; see `docs/product/OPEN-SOURCE-ADOPTION.md` |
-| Codex project tracking | User confirmed project and conversation were moved | Project folder is current working directory |
-| Private/customer artifacts | Excluded from source scope | `outputs/` is git-ignored; do not publish or stage local artifacts |
+Updated: 2026-11-03 · Phase: M0 design baseline + TP-02 runtime qualification complete · WIP limit: one product task unless explicitly agreed
 
 ## Handoff gate
 
-The public planning baseline is ready for a bounded framework qualification spike, not for unrestricted feature coding. Complete TP-02 and accept ADR-0002 before product runtime work. Each later TP story must be marked ready with interfaces, acceptance evidence, security/data boundaries and failure states. A design review is not a penetration test or security certification.
+TP-02 is complete with result **`qualified`**: ObjectStack 18.2.0 (release
+commit `27f38ada498162835c2f1d56e6edabe18910b4ed`) is accepted as the
+business-metadata runtime under ADR-0002's bounded conditions. The
+qualification spike has executable, reproducible evidence (35/35 live
+assertions over REST and MCP, external OIDC via Dex, read-only PostgreSQL
+federation, backup/restore drill, durable-coordination simulation).
+
+| Area | Status | Evidence / next step |
+|---|---|---|
+| Product strategy, PRD and UX specification | Design baseline; user validation pending under TP-03 | `docs/product/` |
+| Business and system architecture | Authorized service boundary read against 18.2 hardening docs | `docs/architecture/` |
+| Data, API, security and authorization | Six-gate anonymous-deny chain and fail-closed federation confirmed by execution | `spikes/objectstack-qualification/permission-bypass-matrix.md` |
+| Framework and license research | **TP-02 qualified**; Apache-2.0 train with bounded adoption conditions | `spikes/objectstack-qualification/OBJECTSTACK-QUALIFICATION.md`, ADR-0002 |
+| OIDC, federation, durable coordination | External Dex OIDC, sys_secret datasource credentials, ledger/outbox simulation proven | spike `oidc-notes.md`, `connector-findings.md`, `temporal-findings.md` |
+| Code architecture and contribution process | Design baseline prepared | `docs/engineering/`, CONTRIBUTING.md, ADRs |
+| Static task contract tooling | Static validator green; spike adds native-ID extension validator | `contracts/`, spike `scripts/` |
+| Backlog tracking | TP-02 done/qualified | `docs/backlog.json` |
+| Framework launch readiness | Runtime trust boundaries proven; no customer install/SLA yet | TP-03/TP-16 external evidence remains |
+| Product runtime / real connectors / Agent / generated UI | Not product code (disposable spike only) | TP-04/TP-07/TP-10/TP-11; platform must add budget/provenance envelope (F-4) and effect-digest ledger (F-5) |

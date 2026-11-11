@@ -1,0 +1,47 @@
+{
+  "generated": "2026-11-03",
+  "tool": "pnpm licenses list (pnpm 10.31.0)",
+  "installedPackages": 506,
+  "licenseCounts": {
+    "MIT": 388,
+    "Apache-2.0": 70,
+    "ISC": 23,
+    "PSF-2.0": 1,
+    "Unlicense": 1,
+    "Unknown": 1,
+    "MIT/X11": 1,
+    "BSD-2-Clause": 3,
+    "BSD-3-Clause": 5,
+    "BlueOak-1.0.0": 5,
+    "(MIT OR GPL-3.0-or-later)": 1,
+    "MPL-2.0": 2,
+    "MIT-0": 2,
+    "(MIT AND Zlib)": 1,
+    "(MIT OR CC0-1.0)": 1,
+    "MIT License": 1
+  },
+  "objectStackPackagesAllApache": 59,
+  "objectStackCount": 59,
+  "reviewNeeded": [
+    {
+      "name": "jszip",
+      "v": "3.10.2",
+      "license": "(MIT OR GPL-3.0-or-later)"
+    },
+    {
+      "name": "lightningcss",
+      "v": "1.33.0",
+      "license": "MPL-2.0"
+    },
+    {
+      "name": "lightningcss-darwin-arm64",
+      "v": "1.33.0",
+      "license": "MPL-2.0"
+    },
+    {
+      "name": "buffers",
+      "v": "0.1.1",
+      "license": "Unknown"
+    }
+  ]
+}

@@ -57,7 +57,7 @@
       "id": "TP-02",
       "title": "Qualify runtime and framework candidates",
       "milestone": "M0",
-      "status": "planned",
+      "status": "done",
       "dependsOn": [
         "TP-01"
       ],
@@ -69,7 +69,8 @@
         "Exercise API/OpenAPI, DB migration, Temporal replay, connector contract, ObjectStack-native view rendering with only a narrow app-composition manifest, AG-UI and MCP auth boundary using a synthetic vertical spike.",
         "Update ADR-0002 and other affected ADRs with evidence and accepted/rejected choices."
       ],
-      "evidence": "docs/adr/0002-runtime-and-frameworks.md"
+      "evidence": "spikes/objectstack-qualification/OBJECTSTACK-QUALIFICATION.md",
+      "result": "qualified"
     },
     {
       "id": "TP-03",

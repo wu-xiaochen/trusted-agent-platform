@@ -12,4 +12,5 @@ All notable changes will be recorded here. This project is pre-release and has n
 - Added ADR-0007 through ADR-0009 and TP-17 through TP-21 for the new design requirements; these remain proposed/planned and are not implemented evidence.
 - Independent design review corrected the ObjectStack/DomainPackage/AppSpec single-source-of-truth boundary, added staged graph/time-series and private-network requirements, proposed falsifiable pilot targets, and documented current open-source launch gaps and competitor saturation.
 - Added a bounded AI coding handoff contract and a staged TP-02 implementation plan with stop/go gates; downstream runtime implementation remains gated on qualification evidence.
+- Completed TP-02: ObjectStack 18.2.0 (release commit `27f38ada…`) qualified on PostgreSQL with external OIDC (Dex), read-only federation, REST/MCP permission matrix, backup/restore drill and durable-coordination simulation; ADR-0002 accepted with bounded adoption conditions. Evidence: `spikes/objectstack-qualification/`.
 
