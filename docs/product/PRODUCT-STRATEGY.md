@@ -29,6 +29,18 @@ Position the project as a **verified business task app builder/runtime for exist
 
 The differentiation hypothesis is a measurable reduction in the time and specialist effort needed to go from a business task to a maintained, controlled application. The product should show the user what is connected, what the source can do, which rules are confirmed, which paths require approval, and what happens after an uncertain result. This hypothesis is not yet proven by customer research.
 
+### Core competitive capability and strategic goal
+
+The project's core competitive capability is to turn a selected cross-system business task into a **verified, permission-aware, operable task application**: business evidence and source capabilities are mapped to one reviewed model; each read and action is checked against the current principal and source scope; source writes use source-owned business commands with effect-bound confirmation/approval; and duplicate or uncertain outcomes are reconciled before a retry. People, conventional applications, Agents, APIs and approved MCP surfaces use the same server-side capability boundary. Published model, Agent and application artifacts are immutable and reusable across task experiences.
+
+The strategic goal is to prove this complete path on real, supported enterprise interfaces and show that it reduces task setup time and specialist effort without hiding work transferred to the customer. The advantage should compound through tested connector compatibility and identity modes, reusable domain task packages, business-owner-reviewed evidence and exception cases, and measured execution/recovery behavior. These assets become a defensible position only when customers use and reuse them; architecture or feature presence alone is not proof of differentiation.
+
+**Competitive position:** ObjectOS already offers a broad executable-ontology and business-application runtime, including metadata-driven objects, actions, permissions, flows, Agents and external database federation. This project builds on the qualified ObjectStack foundation and must not claim those primitives as unique. Its differentiation hypothesis is a stronger focus on completing and operating bounded cross-system tasks with explicit source capability verification, current authorization, source-owned writes and unknown-outcome recovery, then proving the result through domain-specific deployments and measured setup/operation effort. These are areas of emphasis and qualification, not claims that ObjectOS cannot support them.
+
+Semantica is centered on graph-native context, ontology, provenance and reasoning. It may inform or supply an isolated proposal-generation capability, but it does not replace this project's business application and source-action runtime. Any such output remains an untrusted draft that must be checked against authorized evidence and the single published ObjectStack-native model.
+
+**Proof required:** evaluate against the customer's current way of delivering the same task and against relevant platform alternatives. Record elapsed time and specialist touch time, task success, human corrections, source and identity coverage, denied-path results, duplicate/unknown-outcome recovery, and the effort to configure a second task without a kernel fork. Until connected customer trials establish these results, describe the position as a strategic hypothesis, not an achieved market advantage.
+
 Open-source success should be earned through a working, self-hostable vertical slice, reproducible evaluations, understandable documentation, and external reuse. GitHub Trending placement is an aspiration, not a delivery commitment; no design can guarantee a ranking.
 
 ## Outcome measures
